@@ -13,30 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Entidade">
+      <UniqueIdentifier>{9daa7ef6-3f9a-4b39-a4af-bdde3ff21f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Estado">
+      <UniqueIdentifier>{16e7bc98-6b59-43a3-84b9-5f5a29821bd6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Jogo.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Estado.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Entidade.cpp">
+      <Filter>Entidade</Filter>
+    </ClCompile>
+    <ClCompile Include="Estado.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
     <ClCompile Include="EstadoJogo.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoMenuPrincipal.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="EntidadeDinamica.cpp">
+      <Filter>Entidade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Estado.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Jogo.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Entidade.h">
+      <Filter>Entidade</Filter>
+    </ClInclude>
+    <ClInclude Include="Estado.h">
+      <Filter>Estado</Filter>
+    </ClInclude>
     <ClInclude Include="EstadoJogo.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoMenuPrincipal.h">
+      <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="EntidadeDinamica.h">
+      <Filter>Entidade</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

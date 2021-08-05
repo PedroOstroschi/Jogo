@@ -8,10 +8,17 @@
 using namespace std;
 class Estado
 {
+private:
+
 protected:
 	//variaveis
 	stack<Estado*>* estados; //Pilha de estados
 	sf::RenderWindow* janela;//janela do estado
+	std::map<std::string, int>* teclasDisponiveis;
+	std::map<std::string, int> teclas;
+	std::vector<sf::Texture> textures;
+
+	//Recursos
 	int pontuacao;
 
 	//flags
@@ -20,11 +27,14 @@ protected:
 	bool ganhou;
 	bool pausado;
 
+	//funcoes
+	virtual void iniTeclas() = 0; // cada estado vai definir a utilizacao das teclas
+
 	
 
 public:
 	//construtora/destrutora
-	Estado(sf::RenderWindow* janela, std::stack<Estado*>* estados, bool cooperativo);
+	Estado(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados, bool cooperativo);
 	virtual ~Estado();
 
 	//set`s/get`s

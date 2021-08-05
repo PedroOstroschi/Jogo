@@ -1,15 +1,17 @@
 #include "Estado.h"
 
 //construtora/destrutora
-Estado::Estado(sf::RenderWindow* janela, std::stack<Estado*>* estados, bool cooperativo)
+Estado::Estado(std::map<std::string, int>* teclasDisponiveis,sf::RenderWindow* janela, std::stack<Estado*>* estados, bool cooperativo)
 {
 	this->janela = janela;
+	this->teclasDisponiveis = teclasDisponiveis;
 	this->sair = false;
 	this->cooperativo = cooperativo;
 	this->ganhou = false;
 	this->pausado = false;
 	this->pontuacao = 0;
 	this->estados = estados;
+
 }
 Estado:: ~Estado(){}
 

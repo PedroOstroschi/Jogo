@@ -145,14 +145,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entidade.cpp" />
+    <ClCompile Include="EntidadeDinamica.cpp" />
     <ClCompile Include="Estado.cpp" />
     <ClCompile Include="EstadoJogo.cpp" />
+    <ClCompile Include="EstadoMenuPrincipal.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entidade.h" />
+    <ClInclude Include="EntidadeDinamica.h" />
     <ClInclude Include="Estado.h" />
     <ClInclude Include="EstadoJogo.h" />
+    <ClInclude Include="EstadoMenuPrincipal.h" />
     <ClInclude Include="Jogo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

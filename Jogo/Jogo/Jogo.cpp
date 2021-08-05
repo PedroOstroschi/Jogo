@@ -20,14 +20,27 @@ void Jogo::iniJanela()
 void Jogo::iniEstados()
 {   
     //coloca os estados na pilha original de estados
-    this->estados.push(new Estado(this->janela, &this->estados, false));
+    this->estados.push(new EstadoJogo( &this->teclasDisponiveis, this->janela)); //, &this->estados, false
+}
+
+void Jogo::iniTeclas()
+{
+   
+    this->teclasDisponiveis.emplace("A", sf::Keyboard::Key::A);
+    this->teclasDisponiveis.emplace("W", sf::Keyboard::Key::W);
+    this->teclasDisponiveis.emplace("S", sf::Keyboard::Key::S);
+    this->teclasDisponiveis.emplace("D", sf::Keyboard::Key::D);
+    this->teclasDisponiveis.emplace("Escape", sf::Keyboard::Key::Escape);
+
 }
 
 //construtora/destrutora
 Jogo::Jogo() 
 {
     this->iniJanela();
+    this->iniTeclas();
     this->iniEstados();
+
 
 }
 Jogo::~Jogo() 
@@ -42,7 +55,7 @@ Jogo::~Jogo()
     }
 }
 
-//funcoes
+//funcoes gerais
 
 
 
@@ -52,6 +65,7 @@ void Jogo::atualizaTd()
     this->td = this->tdRelogio.restart().asSeconds();
     system("cls");
     std::cout << this->td << "\n";
+    //std::cout << this->
 }
 
 
@@ -84,24 +98,33 @@ void Jogo::atualiza()
         
 
     }
+    else
+    {
+        this->janela->close();
+    }
 }
 
 void Jogo::renderiza()
 {
     this->janela->clear();
 
-    //renderiza o jogo
-    if (!this->estados.empty()) { this->estados.top()->renderiza(); }
+    //renderiza o estado atual da pilha
+    if (!this->estados.empty())
+    {
+        this->estados.top()->renderiza();
+        std::cout
+    }
+ 
     this->janela->display();
 }
 
-void Jogo::rodaJogo()
+void Jogo::executa()
 {
 
     while (this->janela->isOpen())
     {
         this->atualizaTd();
-        this->atualiza();
+        this->atualiza();//loop principal
         this->renderiza();
 
     }
