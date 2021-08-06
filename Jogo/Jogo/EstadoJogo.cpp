@@ -2,6 +2,7 @@
 //funcao privada
 void EstadoJogo::iniTeclas()
 {
+	//teste
 	this->teclas.emplace("MOVER_ESQ",this->teclasDisponiveis->at("A"));
 	this->teclas.emplace("MOVER_DIR", this->teclasDisponiveis->at("D"));
 	this->teclas.emplace("MOVER_CIMA", this->teclasDisponiveis->at("W"));
@@ -28,20 +29,24 @@ void EstadoJogo::fechaEstado()
 {
 }
 
-void EstadoJogo::atualiza(const float td)
+void EstadoJogo::atualiza(const float& td)
 {
 	this->atualizaTeclas(td);
-	//this->jogador.atualiza(td);
 }
 
 void EstadoJogo::renderiza(sf::RenderTarget* alvo)
 {
+
 	//alvo esta como poonteiro nulo
-	if (!alvo)
+	if (alvo == NULL)
 	{
 		alvo = this->janela;
+
 	}
-	this->jogador->renderiza(*alvo);
+
+
+	this->jogador->renderiza(this->janela);
+
 
 }
 

@@ -18,7 +18,7 @@ public:
 	virtual~Entidade();
 
 	//Funcoes gerais
-	virtual void renderiza(sf::RenderTarget& alvo);
+	virtual void renderiza(sf::RenderWindow* alvo);
 
 
 };

@@ -16,10 +16,11 @@ Entidade::~Entidade()
 
 
 
-void Entidade::renderiza(sf::RenderTarget& alvo)
+void Entidade::renderiza(sf::RenderWindow* alvo)
 {
-	alvo.draw(this->forma);
-	std::cout << this->forma.getPosition().x << this->forma.getPosition().y << "\n";
+	
+	alvo->draw(this->forma);
+
 
 }
 

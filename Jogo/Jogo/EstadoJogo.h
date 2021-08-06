@@ -2,6 +2,7 @@
 #include "Estado.h"
 #include "EntidadeDinamica.h"
 #include <stack>
+
 class EstadoJogo :
     public Estado
 {
@@ -19,7 +20,7 @@ public:
 
     //Funcoes
     void fechaEstado();
-    void atualiza(const float td); //chama atualizaTecla
+    void atualiza(const float& td) override; //chama atualizaTecla
     void renderiza(sf::RenderTarget* alvo  = NULL);
     void atualizaTeclas(const float td );
 

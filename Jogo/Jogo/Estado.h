@@ -17,6 +17,7 @@ protected:
 	std::map<std::string, int>* teclasDisponiveis;
 	std::map<std::string, int> teclas;
 	std::vector<sf::Texture> textures;
+	
 
 	//Recursos
 	int pontuacao;
@@ -49,9 +50,9 @@ public:
 	void fechaEstado();
 	void pausaEstado();
 	void despausaEstado();
-	void atualiza(const float& td);
-	void renderiza();
-	void atualizaTecla(const float& td);
+	virtual void atualiza(const float& td) = 0;
+	virtual void renderiza(sf::RenderTarget* target = NULL) = 0;
+	virtual void atualizaTecla(const float& td);
 
 
 

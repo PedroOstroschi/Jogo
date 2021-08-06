@@ -51,17 +51,12 @@ void Estado::despausaEstado()
 	this->pausado = false;
 }
 
-void Estado::atualiza(const float& td)
-{
-	this->atualizaTecla(td);
-}
 
-void Estado::renderiza()
-{
-}
 
 void Estado::atualizaTecla(const float& td)
 {
 }
+
+
 
 

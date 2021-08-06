@@ -10,6 +10,7 @@
 //inicializadora
 void Jogo::iniJanela()
 {   
+ 
     this->janela = new sf::RenderWindow(sf::VideoMode(800, 600), "C++ Jogo");
     //configuracoes da janela
     this->janela->setFramerateLimit(120);
@@ -112,7 +113,6 @@ void Jogo::renderiza()
     if (!this->estados.empty())
     {
         this->estados.top()->renderiza();
-        std::cout
     }
  
     this->janela->display();
