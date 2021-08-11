@@ -6,20 +6,21 @@
 class Entidade
 {
 private:
-
+	void initVariaveis();
 protected:
-	sf::RectangleShape forma;
+	/*Variaveis*/
 
-
+	sf::Sprite sprite;
 
 public:
-	//Construtora/Destrutora
+	/*Construtora e destrutora*/
 	Entidade();
-	virtual~Entidade();
+	virtual ~Entidade();
 
-	//Funcoes gerais
+	/*Funções de Componente*/
+	void setTexture(sf::Texture& texture);
+
+	/*Funções*/
+	virtual void setPosition(const float x, const float y);
 	virtual void renderiza(sf::RenderWindow* alvo);
-
-
 };
-

@@ -1,28 +1,35 @@
 #include "Entidade.h"
 
-//Construtora/Destrutora
+void Entidade::initVariaveis()
+{
 
+}
+
+/*Construtora e Destrutora*/
 Entidade::Entidade()
 {
-	this->forma.setSize(sf::Vector2f(50.f, 50.f));
-	this->forma.setFillColor(sf::Color::White);
-	this->forma.setPosition(sf::Vector2f(400.f, 300.f));
-
+	this->initVariaveis();
 }
 
 Entidade::~Entidade()
 {
+
 }
 
+/*Funções de Componente*/
+void Entidade::setTexture(sf::Texture& texture)
+{
+	this->sprite.setTexture(texture);
+}
 
+/*Funções*/
+
+void Entidade::setPosition(const float x, const float y)
+{
+	this->sprite.setPosition(x, y);
+}
 
 void Entidade::renderiza(sf::RenderWindow* alvo)
 {
-	
-	alvo->draw(this->forma);
-
-
+	alvo->draw(this->sprite);
 }
-
-
-

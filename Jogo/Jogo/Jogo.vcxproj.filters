@@ -19,6 +19,18 @@
     <Filter Include="Estado">
       <UniqueIdentifier>{16e7bc98-6b59-43a3-84b9-5f5a29821bd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entidade\Entidades Dinamicas">
+      <UniqueIdentifier>{ab64567a-1dba-4fb9-9c65-1e64084eb390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Componentes">
+      <UniqueIdentifier>{f7f9cf5c-afca-4de9-b29b-ee514077789e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidade\Abstratas">
+      <UniqueIdentifier>{813ed116-3571-470d-bab1-9f54def53f63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidade\Entidades fixas">
+      <UniqueIdentifier>{586e2e7e-29df-47ca-8ca7-dbd0ddcb6c7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Jogo.cpp">
@@ -26,9 +38,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Entidade.cpp">
-      <Filter>Entidade</Filter>
     </ClCompile>
     <ClCompile Include="Estado.cpp">
       <Filter>Estado</Filter>
@@ -39,17 +48,32 @@
     <ClCompile Include="EstadoMenuPrincipal.cpp">
       <Filter>Estado</Filter>
     </ClCompile>
+    <ClCompile Include="Botao.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoFase1.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoFase2.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClCompile>
+    <ClCompile Include="Jogador.cpp">
+      <Filter>Entidade\Entidades Dinamicas</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponenteMovimento.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidade.cpp">
+      <Filter>Entidade\Abstratas</Filter>
+    </ClCompile>
     <ClCompile Include="EntidadeDinamica.cpp">
-      <Filter>Entidade</Filter>
+      <Filter>Entidade\Abstratas</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Jogo.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Entidade.h">
-      <Filter>Entidade</Filter>
-    </ClInclude>
     <ClInclude Include="Estado.h">
       <Filter>Estado</Filter>
     </ClInclude>
@@ -59,8 +83,32 @@
     <ClInclude Include="EstadoMenuPrincipal.h">
       <Filter>Estado</Filter>
     </ClInclude>
+    <ClInclude Include="Botao.h">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoFase1.h">
+      <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoFase2.h">
+      <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Arquivos de Recurso</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogador.h">
+      <Filter>Entidade\Entidades Dinamicas</Filter>
+    </ClInclude>
+    <ClInclude Include="Jogo.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponenteMovimento.h">
+      <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidade.h">
+      <Filter>Entidade\Abstratas</Filter>
+    </ClInclude>
     <ClInclude Include="EntidadeDinamica.h">
-      <Filter>Entidade</Filter>
+      <Filter>Entidade\Abstratas</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

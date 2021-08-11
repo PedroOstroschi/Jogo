@@ -1,12 +1,35 @@
-#pragma once
 #include"Estado.h"
+#include"EstadoFase1.h"
+#include"Botao.h"
+#include"UIManager.h"
+
 class EstadoMenuPrincipal :
 	public Estado
 {
 private:
+	/*Variaveis*/
+	sf::Texture backgroundTexture;
+	sf::RectangleShape background;
+	std::map<std::string, Botao*> botoes;
+
+	/*Funçõees inicializadoras*/
+	void initVariaveis();
+	void initBackGround();
+	void iniTeclas();
+	void iniBotoes();
+
+protected:
+	sf::Sprite sprite;
+
 public:
-	EstadoMenuPrincipal();
+	/*Construtora e destrutora*/
+	EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);// , UIManager* ui_manager);
 	virtual ~EstadoMenuPrincipal();
 
+	/*Funções*/
+	void atualizaTeclas(const float td);
+	void atualiza(const float& td) override; //chama atualizaTecla
+	void renderiza(sf::RenderTarget* alvo = NULL);
+	void atualizaBotoes();
+	void renderBotoes(sf::RenderTarget* alvo = NULL);
 };
-

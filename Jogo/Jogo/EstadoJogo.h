@@ -1,28 +1,28 @@
 #pragma once
 #include "Estado.h"
-#include "EntidadeDinamica.h"
+#include "Jogador.h"
 #include <stack>
 
 class EstadoJogo :
-    public Estado
+	public Estado
 {
 private:
-    //variaveis
-    EntidadeDinamica* jogador;
+	/*Variaveis*/
+	Jogador* jogador;
 
-    //funcoes inicializadoras
-    void iniTeclas();
+	/*Funçõees inicializadoras*/
+	void iniTeclas();
+	void iniTexturas();
+	void iniJogadores();
 
 public:
-    //Construtora/ destrutora
-    EstadoJogo(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela);
-    virtual ~EstadoJogo();
+	/*Construtora e destrutora*/
+	EstadoJogo(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);
+	virtual ~EstadoJogo();
 
-    //Funcoes
-    void fechaEstado();
-    void atualiza(const float& td) override; //chama atualizaTecla
-    void renderiza(sf::RenderTarget* alvo  = NULL);
-    void atualizaTeclas(const float td );
-
+	/*Funções*/
+	void fechaEstado();
+	void atualizaTeclas(const float td);
+	void atualiza(const float& td) override; //chama atualizaTecla
+	void renderiza(sf::RenderTarget* alvo = NULL);
 };
-

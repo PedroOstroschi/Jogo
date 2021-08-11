@@ -1,21 +1,23 @@
 #pragma once
 #include "Entidade.h"
+#include "ComponenteMovimento.h"
+
 class EntidadeDinamica :
-    public Entidade
+	public Entidade
 {
 private:
 
 protected:
-    float velocidade;
+	ComponenteMovimento* componenteMovimento;
 public:
-    //Construtora / Destrutora
-    EntidadeDinamica();
-    virtual~EntidadeDinamica();
+	/*Construtora e destrutora*/
+	EntidadeDinamica();
+	virtual~EntidadeDinamica();
 
-    //Funcoes
-    void move(const float& td, const float dir_x, const float dir_y);
+	/*Componentes*/
+	void createMovementComponent(const float velocidadeMaxima, const float aceleracao, const float desaceleracao);
 
-
-
+	/*Funções*/
+	virtual void move(const float dir_x, const float dir_y, const float& td);
+	virtual void atualiza(const float td);
 };
-
