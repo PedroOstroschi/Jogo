@@ -10,23 +10,27 @@ class Estado
 {
 private:
 
+
+
 protected:
 	//variaveis
 	stack<Estado*>* estados; //Pilha de estados
 	sf::RenderWindow* janela;//janela do estado
 	std::map<std::string, int>* teclasDisponiveis;
 	std::map<std::string, int> teclas;
-	std::vector<sf::Texture> textures;
 	
-
-	//Recursos
-	int pontuacao;
-
 	//flags
 	bool sair; //par fecahr o estado
 	bool cooperativo; //para iniciar o modo de 2 jogadores
 	bool ganhou;
 	bool pausado;
+
+	//Recursos
+	int pontuacao;
+
+
+
+
 
 	//funcoes
 	virtual void iniTeclas() = 0; // cada estado vai definir a utilizacao das teclas

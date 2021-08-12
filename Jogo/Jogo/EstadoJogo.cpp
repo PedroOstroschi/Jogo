@@ -53,12 +53,12 @@ void EstadoJogo::renderiza(sf::RenderTarget* alvo)
 void EstadoJogo::atualizaTeclas(const float td)
 {
 	//atualiza entrada do jogador
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_ESQ"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		this->jogador->move(td, -1.f, 0.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CIMA"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		this->jogador->move(td, 0.f, -1.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_BAIXO"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 		this->jogador->move(td, 0.f, 1.f);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_DIR"))))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		this->jogador->move(td, 1.f, 0.f);
 }

@@ -9,6 +9,8 @@ private:
 	sf::RenderWindow* janela;
 	sf::Event evento;
 
+	
+
 	sf::Clock tdRelogio;
 	float td; //tempo delta ou variacao de tempo
 
