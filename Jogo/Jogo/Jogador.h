@@ -12,7 +12,7 @@ private:
     void iniComponentes();
 
 public:
-    Jogador(float x, float y, sf::Texture& texture);
+    Jogador(float x, float y, sf::Texture& textura);
     virtual ~Jogador();
 
     /*Funcoes*/

@@ -1,7 +1,8 @@
 #pragma once
 #include"UIManager.h"
-#include"EstadoJogo.h"
+#include"EstadoFase.h"
 #include"EstadoMenuPrincipal.h"
+#include"ListaEntidade.h"
 
 class Jogo
 {
@@ -27,6 +28,7 @@ private:
 	void iniJanela();
 	void iniTeclas();
 	void iniEstados();
+
 	//void iniSprites();
 
 public:

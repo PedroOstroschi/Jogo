@@ -12,12 +12,12 @@ void Jogador::iniComponentes()
 }
 
 /*Construtora e Destrutora*/
-Jogador::Jogador(float x, float y, sf::Texture& texture)
+Jogador::Jogador(float x, float y, sf::Texture& textura)
 {
 	this->iniComponentes();
 	this->iniVariaveis();
 
-	this->setTexture(texture);
+	this->setTexture(textura);
 	this->setPosition(x, y);
 }
 

@@ -1,4 +1,3 @@
-#include"Estado.h"
 #include"EstadoFase1.h"
 #include"Botao.h"
 #include"UIManager.h"
@@ -8,13 +7,13 @@ class EstadoMenuPrincipal :
 {
 private:
 	/*Variaveis*/
-	sf::Texture backgroundTexture;
-	sf::RectangleShape background;
+	sf::Texture texturaPlanoDeFundo;
+	sf::RectangleShape planoDeFundo;
 	std::map<std::string, Botao*> botoes;
 
 	/*Funçõees inicializadoras*/
 	void initVariaveis();
-	void initBackGround();
+	void initPlanoDeFundo();
 	void iniTeclas();
 	void iniBotoes();
 
@@ -31,5 +30,5 @@ public:
 	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void atualizaBotoes();
-	void renderBotoes(sf::RenderTarget* alvo = NULL);
+	void renderizaBotoes(sf::RenderTarget* alvo = NULL);
 };

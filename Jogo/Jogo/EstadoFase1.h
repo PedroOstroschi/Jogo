@@ -1,8 +1,8 @@
 #pragma once
-#include "EstadoJogo.h"
+#include "EstadoFase.h"
 
 class EstadoFase1 :
-    public EstadoJogo
+    public EstadoFase
 {
 private:
 

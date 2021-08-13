@@ -6,8 +6,10 @@ private:
 	sf::Sprite& sprite;
 
 	float velocidadeMaxima;
+	float velocidadeMaximaY;
 	float aceleracao;
 	float desaceleracao;
+	float gravidade;
 
 	sf::Vector2f velocidade;
 

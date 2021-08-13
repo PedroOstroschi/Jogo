@@ -87,6 +87,8 @@ void Jogo::iniEstados()
 	this->estados.push(new EstadoMenuPrincipal(&this->teclasDisponiveis, this->janela, &this->estados));//, &ui_manager)); //, false
 }
 
+
+
 /*Construtora e Destrutora*/
 Jogo::Jogo()
 {

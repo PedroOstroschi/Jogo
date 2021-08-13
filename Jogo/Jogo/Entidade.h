@@ -9,7 +9,7 @@ private:
 	void initVariaveis();
 protected:
 	/*Variaveis*/
-
+	sf::RectangleShape corpo; /*area a ser afetada pela colisao*/
 	sf::Sprite sprite;
 
 public:

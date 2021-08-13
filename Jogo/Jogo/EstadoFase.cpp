@@ -1,7 +1,11 @@
-#include "EstadoJogo.h"
+#include "EstadoFase.h"
 
 /*Inicializadores*/
-void EstadoJogo::iniTeclas()
+void EstadoFase::iniElementos()
+{
+	listaEntidades->LEs.push(jogador);
+}
+void EstadoFase::iniTeclas()
 {
 	std::ifstream ifs("Config/estado_jogo_teclas.ini");
 
@@ -19,7 +23,7 @@ void EstadoJogo::iniTeclas()
 	ifs.close();
 }
 
-void EstadoJogo::iniTexturas()
+void EstadoFase::iniTexturas()
 {
 	if (!this->textures["PLAYER"].loadFromFile("Resources/Images/Sprites/Players/1Woodcutter/Woodcutter.png"))
 	{
@@ -27,32 +31,40 @@ void EstadoJogo::iniTexturas()
 	}
 }
 
-void EstadoJogo::iniJogadores()
+void EstadoFase::iniJogadores()
 {
 	this->jogador = new Jogador(0, 0, this->textures["PLAYER"]);
 }
 
 /*Construtora e Destrutora*/
-EstadoJogo::EstadoJogo(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
+EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
 	:Estado(teclasDisponiveis, janela, estados, cooperativo)
 {
 	this->iniTeclas();
 	this->iniTexturas();
 	this->iniJogadores();
+	this->iniElementos();
+
+	listaEntidades = new ListaEntidade;
 }
 
-EstadoJogo::~EstadoJogo()
+EstadoFase::~EstadoFase()
 {
 	delete this->jogador;
 }
 
 /*Funções*/
-void EstadoJogo::fechaEstado()
+void EstadoFase::fechaEstado()
 {
 	std::cout << "fechando estado!" << "\n";
 }
 
-void EstadoJogo::atualizaTeclas(const float td)
+void EstadoFase::pausaEstado()
+{
+	this->estados->push(new EstadoPausado(this->teclasDisponiveis, this->janela, this->estados));
+}
+
+void EstadoFase::atualizaTeclas(const float td)
 {
 	//atualiza entrada do jogador
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_ESQ"))))
@@ -65,9 +77,11 @@ void EstadoJogo::atualizaTeclas(const float td)
 		this->jogador->move(1.f, 0.f, td);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("FECHAR"))))
 		this->sair = true;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))))
+		this->pausaEstado();
 }
 
-void EstadoJogo::atualiza(const float& td)
+void EstadoFase::atualiza(const float& td)
 {
 	this->atualizaPosicaoMouse();
 	this->atualizaTeclas(td);
@@ -75,7 +89,7 @@ void EstadoJogo::atualiza(const float& td)
 	this->jogador->atualiza(td);
 }
 
-void EstadoJogo::renderiza(sf::RenderTarget* alvo)
+void EstadoFase::renderiza(sf::RenderTarget* alvo)
 {
 	//alvo esta como poonteiro nulo
 	if (alvo == NULL)
@@ -84,4 +98,8 @@ void EstadoJogo::renderiza(sf::RenderTarget* alvo)
 	}
 
 	this->jogador->renderiza(this->janela);
+}
+
+void EstadoFase::salva()
+{
 }

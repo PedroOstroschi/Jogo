@@ -31,6 +31,9 @@
     <Filter Include="Entidade\Entidades fixas">
       <UniqueIdentifier>{586e2e7e-29df-47ca-8ca7-dbd0ddcb6c7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lista">
+      <UniqueIdentifier>{413aae72-6b4e-417a-9b87-6ea1f8e336e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Jogo.cpp">
@@ -42,7 +45,7 @@
     <ClCompile Include="Estado.cpp">
       <Filter>Estado</Filter>
     </ClCompile>
-    <ClCompile Include="EstadoJogo.cpp">
+    <ClCompile Include="EstadoFase.cpp">
       <Filter>Estado</Filter>
     </ClCompile>
     <ClCompile Include="EstadoMenuPrincipal.cpp">
@@ -72,12 +75,27 @@
     <ClCompile Include="EntidadeDinamica.cpp">
       <Filter>Entidade\Abstratas</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoPausado.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaEntidade.cpp">
+      <Filter>Lista</Filter>
+    </ClCompile>
+    <ClCompile Include="Colisor.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Plataforma.cpp">
+      <Filter>Entidade\Entidades fixas</Filter>
+    </ClCompile>
+    <ClCompile Include="ListaPlataforma.cpp">
+      <Filter>Lista</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Estado.h">
       <Filter>Estado</Filter>
     </ClInclude>
-    <ClInclude Include="EstadoJogo.h">
+    <ClInclude Include="EstadoFase.h">
       <Filter>Estado</Filter>
     </ClInclude>
     <ClInclude Include="EstadoMenuPrincipal.h">
@@ -109,6 +127,27 @@
     </ClInclude>
     <ClInclude Include="EntidadeDinamica.h">
       <Filter>Entidade\Abstratas</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoPausado.h">
+      <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="Elemento.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Lista.h">
+      <Filter>Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaEntidade.h">
+      <Filter>Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="Colisor.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Plataforma.h">
+      <Filter>Entidade\Entidades fixas</Filter>
+    </ClInclude>
+    <ClInclude Include="ListaPlataforma.h">
+      <Filter>Lista</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

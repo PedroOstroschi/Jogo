@@ -1,32 +1,33 @@
-#include "EstadoMenuPrincipal.h"
+#include "EstadoPausado.h"
 
-/*Inicializadores*/
-void EstadoMenuPrincipal::initVariaveis()
+/*inicializadoras*/
+void EstadoPausado::initVariaveis()
 {
 
 }
 
-void EstadoMenuPrincipal::initPlanoDeFundo()
+void EstadoPausado::initPlanoDeFundo()
 {
 	this->planoDeFundo.setSize(
 		sf::Vector2f
 		(
-			static_cast<float>(this->janela->getSize().x), 
+			static_cast<float>(this->janela->getSize().x),
 			static_cast<float>(this->janela->getSize().y)
 		)
 	);
 
 	if (!this->texturaPlanoDeFundo.loadFromFile("Resources/Images/Backgrounds/background_grafico.png"))
 	{
-		throw "ERRO::ESTADO_MENU_PRINCIPAL::FALHOU_CARREGAR_TEXTURA_BACKGROUND";
+		throw "ERRO::ESTADO_PAUSADO::FALHOU_CARREGAR_TEXTURA_BACKGROUND";
 	}
 
 	this->planoDeFundo.setTexture(&this->texturaPlanoDeFundo);
+
 }
 
-void EstadoMenuPrincipal::iniTeclas()
+void EstadoPausado::iniTeclas()
 {
-	std::ifstream ifs("Config/estado_menu_teclas.ini");
+	std::ifstream ifs("Config/estado_pausado_teclas.ini");
 
 	if (ifs.is_open())
 	{
@@ -40,50 +41,47 @@ void EstadoMenuPrincipal::iniTeclas()
 	}
 
 	ifs.close();
+
 }
 
-void EstadoMenuPrincipal::iniBotoes()
+void EstadoPausado::iniBotoes()
 {
-	this->botoes["EDITOR"] = new Botao(200, 200, 200, 200,
-		&this->font, "EDITOR", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));	
-	
-	
-	this->botoes["FASE_1"] = new Botao(802, 700, 150, 50,
-		&this->font, "Novo Jogo", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
-	
-	this->botoes["FASE_2"] = new Botao(970, 700, 150, 50,
-		&this->font, "Selecionar Fase", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
-		
-	this->botoes["CONFIG"] = new Botao(802, 770, 150, 50,
-		&this->font, "Configurações", 24,
+	this->botoes["DESPAUSAR"] = new Botao(802, 700, 150, 50,
+		&this->font, "Despausar", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 
-	this->botoes["SAIR"] = new Botao(970, 770, 150, 50,
+	this->botoes["Salvar"] = new Botao(970, 700, 150, 50,
+		&this->font, "Salvar", 24,
+		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
+		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
+
+	this->botoes["Menu_Principal"] = new Botao(802, 770, 150, 50,
+		&this->font, "Menu Principal", 24,
+		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
+		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
+
+	this->botoes["Sair"] = new Botao(970, 770, 150, 50,
 		&this->font, "Sair", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
+
 }
 
-/*Construtora e Destrutora*/
-EstadoMenuPrincipal::EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)// , UIManager* ui_manager)
+
+/*Construtora Destrutora*/
+EstadoPausado::EstadoPausado(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
 	:Estado(teclasDisponiveis, janela, estados, cooperativo)
 {
-	//this->ui_manager = ui_manager;
 	this->initVariaveis();
 	this->initPlanoDeFundo();
 	this->iniFontes();
 	this->iniTeclas();
 	this->iniBotoes();
+
 }
 
-EstadoMenuPrincipal::~EstadoMenuPrincipal()
+EstadoPausado::~EstadoPausado()
 {
 	auto it = this->botoes.begin();
 	for (it = this->botoes.begin(); it != this->botoes.end(); ++it)
@@ -92,9 +90,13 @@ EstadoMenuPrincipal::~EstadoMenuPrincipal()
 	}
 }
 
-/*Funções*/
+/*Funcoes*/
+void EstadoPausado::despausa()
+{
+	this->estados->pop();
+}
 
-void EstadoMenuPrincipal::atualizaTeclas(const float td)
+void EstadoPausado::atualizaTeclas(const float td)
 {
 	//atualiza entrada do jogador
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt))
@@ -106,14 +108,14 @@ void EstadoMenuPrincipal::atualizaTeclas(const float td)
 		this->fechaEstado();
 }
 
-void EstadoMenuPrincipal::atualiza(const float& td)
+void EstadoPausado::atualiza(const float& td)
 {
 	this->atualizaTeclas(td);
 	this->atualizaPosicaoMouse();
 	this->atualizaBotoes();
 }
 
-void EstadoMenuPrincipal::renderiza(sf::RenderTarget* alvo)
+void EstadoPausado::renderiza(sf::RenderTarget* alvo)
 {
 	//alvo esta como ponteiro nulo
 	if (alvo == NULL)
@@ -122,7 +124,6 @@ void EstadoMenuPrincipal::renderiza(sf::RenderTarget* alvo)
 	alvo->draw(this->planoDeFundo);
 
 	this->renderizaBotoes(alvo);
-
 
 	//REMOVE
 	sf::Text mouseText;
@@ -137,7 +138,7 @@ void EstadoMenuPrincipal::renderiza(sf::RenderTarget* alvo)
 	alvo->draw(mouseText);
 }
 
-void EstadoMenuPrincipal::atualizaBotoes()
+void EstadoPausado::atualizaBotoes()
 {
 	/*atualiza todos os botoes desse estado e cuida das suas funcionalidades*/
 	//main loop
@@ -146,41 +147,40 @@ void EstadoMenuPrincipal::atualizaBotoes()
 		it.second->update(this->mousePosView);
 	}
 
-	//editor
-	if (this->botoes["EDITOR"]->isPressed())
+	//despausa
+	if (this->botoes["DESPAUSAR"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->despausa();
 	}
 
-	//new game
-	if (this->botoes["FASE_1"]->isPressed())
-	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
-	}
-	
-	//select stage
-	if (this->botoes["FASE_2"]->isPressed())
-	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
-	}
-	
-	//config menu
-	if (this->botoes["CONFIG"]->isPressed())
+	//Salva o jogo
+	if (this->botoes["SALVAR"]->isPressed())
 	{
 		/*TODO*/
 	}
 
-	//quit the game
+	//Volta ao menu inicial
+	if (this->botoes["MENU_PRINCIPAL"]->isPressed())
+	{
+		/*TODO*/
+	}
+
+	//Sai do jogo
 	if (this->botoes["SAIR"]->isPressed())
 	{
 		this->sair = true;
 	}
+
 }
 
-void EstadoMenuPrincipal::renderizaBotoes(sf::RenderTarget* alvo)
+void EstadoPausado::renderizaBotoes(sf::RenderTarget* alvo)
 {
 	for (auto& it : this->botoes)
 	{
 		it.second->render(alvo);
 	}
 }
+
+
+
+

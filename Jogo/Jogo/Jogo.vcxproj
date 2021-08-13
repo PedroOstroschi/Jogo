@@ -156,31 +156,43 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Botao.cpp" />
+    <ClCompile Include="Colisor.cpp" />
     <ClCompile Include="ComponenteMovimento.cpp" />
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="EntidadeDinamica.cpp" />
     <ClCompile Include="Estado.cpp" />
     <ClCompile Include="EstadoFase1.cpp" />
     <ClCompile Include="EstadoFase2.cpp" />
-    <ClCompile Include="EstadoJogo.cpp" />
+    <ClCompile Include="EstadoFase.cpp" />
     <ClCompile Include="EstadoMenuPrincipal.cpp" />
+    <ClCompile Include="EstadoPausado.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="ListaEntidade.cpp" />
+    <ClCompile Include="ListaPlataforma.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Botao.h" />
+    <ClInclude Include="Colisor.h" />
     <ClInclude Include="ComponenteMovimento.h" />
+    <ClInclude Include="Elemento.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="EntidadeDinamica.h" />
     <ClInclude Include="Estado.h" />
     <ClInclude Include="EstadoFase1.h" />
     <ClInclude Include="EstadoFase2.h" />
-    <ClInclude Include="EstadoJogo.h" />
+    <ClInclude Include="EstadoFase.h" />
     <ClInclude Include="EstadoMenuPrincipal.h" />
+    <ClInclude Include="EstadoPausado.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
+    <ClInclude Include="Lista.h" />
+    <ClInclude Include="ListaEntidade.h" />
+    <ClInclude Include="ListaPlataforma.h" />
+    <ClInclude Include="Plataforma.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

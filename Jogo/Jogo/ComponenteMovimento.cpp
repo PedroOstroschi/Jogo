@@ -9,7 +9,8 @@ ComponenteMovimento::ComponenteMovimento(sf::Sprite& sprite,
 	: sprite(sprite),
 	velocidadeMaxima(velocidadeMaxima), aceleracao(aceleracao), desaceleracao(desaceleracao)
 {
-	
+	this->gravidade = 4.f;
+	this->velocidadeMaximaY = 15.f;
 }
 
 ComponenteMovimento::~ComponenteMovimento()
@@ -36,13 +37,21 @@ void ComponenteMovimento::move(const float dir_x, const float dir_y, const float
 
 void ComponenteMovimento::update(const float& td)
 {
+
+	/*Aplica gravidade*/
+
+	//this->velocidade.y += 1.0 * this->gravidade;
+	//Verificar velocidade maxima
+	if (this->velocidade.y > this->velocidadeMaximaY)
+		this->velocidade.y = this->velocidadeMaximaY * ((this->velocidade.y < 0.f)? -1.f : 1.f);
+
 	/*Acelera a sprite até a velocidade maxima e ao parar de andar, a desacelera
 	criando assim uma movimentacao mais fluida*/
 
 	//X
-	if (this->velocidade.x > 0.f)	//check for positive x
+	if (this->velocidade.x > 0.f)	//verifica se x eh positivo
 	{
-		//max velocity check
+		//Verificar velocidade maxima
 		if (this->velocidade.x > this->velocidadeMaxima)
 			this->velocidade.x = this->velocidadeMaxima;
 
@@ -51,13 +60,13 @@ void ComponenteMovimento::update(const float& td)
 		if (this->velocidade.x < 0.f)
 			this->velocidade.x = 0.f;
 	}
-	else if(this->velocidade.x < 0.f)	//check for negative x
+	else if(this->velocidade.x < 0.f)	//verifica se x eh negativo
 	{
-		//max vel check
+		//Verificar velocidade maxima
 		if (this->velocidade.x < -this->velocidadeMaxima)
 			this->velocidade.x = -this->velocidadeMaxima;
 
-		//deceleration
+		//desaceleracao
 		this->velocidade.x += desaceleracao;
 		if (this->velocidade.x > 0.f)
 			this->velocidade.x = 0.f;
@@ -66,7 +75,7 @@ void ComponenteMovimento::update(const float& td)
 	//Y
 	if (this->velocidade.y > 0.f)	//check for positive y
 	{
-		//max velocity check
+		//Verificar velocidade maxima
 		if (this->velocidade.y > this->velocidadeMaxima)
 			this->velocidade.y = this->velocidadeMaxima;
 
@@ -77,11 +86,11 @@ void ComponenteMovimento::update(const float& td)
 	}
 	else if (this->velocidade.y < 0.f)	//check for negative y
 	{
-		//max vel check
+		//Verificar velocidade maxima
 		if (this->velocidade.y < -this->velocidadeMaxima)
 			this->velocidade.y = -this->velocidadeMaxima;
 
-		//deceleration
+		//desaceleracao
 		this->velocidade.y += desaceleracao;
 		if (this->velocidade.y > 0.f)
 			this->velocidade.y = 0.f;
