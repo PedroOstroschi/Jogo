@@ -1,24 +1,34 @@
 #include "EntidadeDinamica.h"
 
-//Construtora / Destrutora 
+/*Construtora e Destrutora*/
 EntidadeDinamica::EntidadeDinamica() :
 	Entidade()
 {
-	this->velocidade = 100.f;
+	//this->componenteMovimento = NULL;
 }
 
 EntidadeDinamica::~EntidadeDinamica()
 {
+	delete this->componenteMovimento;
 }
 
-
-
-/*void EntidadeDinamica::atualiza(const float td)
+/*Funcoes Componentes*/
+void EntidadeDinamica::createMovementComponent(const float velocidadeMaxima, const float aceleracao, const float desaceleracao)
 {
+	this->componenteMovimento = new ComponenteMovimento(this->sprite, velocidadeMaxima, aceleracao, desaceleracao);
+}
 
-}*/
-
-void EntidadeDinamica::move(const float& td, const float dir_x, const float dir_y)
+/*Funções*/
+void EntidadeDinamica::atualiza(const float td)
 {
-	this->forma.move(dir_x * this->velocidade * td, dir_y * this->velocidade * td);
+	if (this->componenteMovimento)
+		this->componenteMovimento->update(td);
+}
+
+void EntidadeDinamica::move(const float dir_x, const float dir_y, const float& td)
+{
+	if (this->componenteMovimento)
+	{
+		this->componenteMovimento->move(dir_x, dir_y, td);	//seta velocidade
+	}
 }

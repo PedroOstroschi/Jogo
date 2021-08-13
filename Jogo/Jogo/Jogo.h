@@ -1,13 +1,18 @@
 #pragma once
-#include"Estado.h"
+#include"UIManager.h"
 #include"EstadoJogo.h"
+#include"EstadoMenuPrincipal.h"
 
 class Jogo
 {
 private:
-	//variaveis
+	/*Variaveis*/
 	sf::RenderWindow* janela;
 	sf::Event evento;
+	std::vector<sf::VideoMode> videoModes;
+	sf::ContextSettings windowSettings;
+	bool fullscreen;
+	//UIManager ui_manager;
 
 	
 
@@ -15,27 +20,27 @@ private:
 	float td; //tempo delta ou variacao de tempo
 
 	std::stack<Estado*> estados;
-	std::map < std::string , int > teclasDisponiveis;
+	std::map<std::string,int> teclasDisponiveis;
 
-
-
-	//inicializacao
+	/*Funções Inicializadoras*/
+	void iniVariaveis();
 	void iniJanela();
-	void iniEstados();
 	void iniTeclas();
+	void iniEstados();
+	//void iniSprites();
 
 public:
-	//construtora/destrutora
+	/*Construtora e destrutora*/
 	Jogo();
 	~Jogo();
 
-	//funcoes gerais
+	/*Funções*/
 	void atualizaTd();
 	void atualizaEventosSFML();
 	void atualiza();
 	void renderiza();
 
-	//principal
+	/**principal**/
 	void executa();
 };
 
