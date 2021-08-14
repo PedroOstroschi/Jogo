@@ -165,12 +165,13 @@
     <ClCompile Include="EstadoFase2.cpp" />
     <ClCompile Include="EstadoFase.cpp" />
     <ClCompile Include="EstadoMenuPrincipal.cpp" />
-    <ClCompile Include="EstadoPausado.cpp" />
+    <ClCompile Include="Inimigo1.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="ListaEntidade.cpp" />
     <ClCompile Include="ListaPlataforma.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuPause.cpp" />
     <ClCompile Include="Plataforma.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
@@ -186,12 +187,13 @@
     <ClInclude Include="EstadoFase2.h" />
     <ClInclude Include="EstadoFase.h" />
     <ClInclude Include="EstadoMenuPrincipal.h" />
-    <ClInclude Include="EstadoPausado.h" />
+    <ClInclude Include="Inimigo1.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="ListaEntidade.h" />
     <ClInclude Include="ListaPlataforma.h" />
+    <ClInclude Include="MenuPause.h" />
     <ClInclude Include="Plataforma.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>

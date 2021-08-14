@@ -16,6 +16,7 @@ public:
 
 	/*set e get*/
 	const int getTamanho() { this->tamanho; }
+
 	TL* getItem(int posicao)
 	{
 		Elemento<TL>* temporario = pPrimeiro;

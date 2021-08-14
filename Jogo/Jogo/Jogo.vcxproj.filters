@@ -34,6 +34,9 @@
     <Filter Include="Lista">
       <UniqueIdentifier>{413aae72-6b4e-417a-9b87-6ea1f8e336e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{be5b73d8-7165-4c85-a2f4-aa5f9c7a8d83}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Jogo.cpp">
@@ -75,9 +78,6 @@
     <ClCompile Include="EntidadeDinamica.cpp">
       <Filter>Entidade\Abstratas</Filter>
     </ClCompile>
-    <ClCompile Include="EstadoPausado.cpp">
-      <Filter>Estado</Filter>
-    </ClCompile>
     <ClCompile Include="ListaEntidade.cpp">
       <Filter>Lista</Filter>
     </ClCompile>
@@ -89,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="ListaPlataforma.cpp">
       <Filter>Lista</Filter>
+    </ClCompile>
+    <ClCompile Include="Inimigo1.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuPause.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,9 +134,6 @@
     <ClInclude Include="EntidadeDinamica.h">
       <Filter>Entidade\Abstratas</Filter>
     </ClInclude>
-    <ClInclude Include="EstadoPausado.h">
-      <Filter>Estado</Filter>
-    </ClInclude>
     <ClInclude Include="Elemento.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -148,6 +151,12 @@
     </ClInclude>
     <ClInclude Include="ListaPlataforma.h">
       <Filter>Lista</Filter>
+    </ClInclude>
+    <ClInclude Include="Inimigo1.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuPause.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

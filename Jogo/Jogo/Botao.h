@@ -1,3 +1,4 @@
+#pragma once
 #include"Estado.h"
 
 enum status_botao { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
