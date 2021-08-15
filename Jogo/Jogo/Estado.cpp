@@ -56,6 +56,7 @@ void Estado::despausaEstado()
 
 void Estado::atualizaTecla(const float& td)
 {
+
 }
 
 void Estado::atualizaPosicaoMouse()

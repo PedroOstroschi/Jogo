@@ -9,7 +9,7 @@ ComponenteMovimento::ComponenteMovimento(sf::Sprite& sprite,
 	: sprite(sprite),
 	velocidadeMaxima(velocidadeMaxima), aceleracao(aceleracao), desaceleracao(desaceleracao)
 {
-	this->gravidade = 4.f;
+	this->gravidade = 40.f;
 	this->velocidadeMaximaY = 15.f;
 }
 
@@ -40,7 +40,8 @@ void ComponenteMovimento::update(const float& td)
 
 	/*Aplica gravidade*/
 
-	//this->velocidade.y += 1.0 * this->gravidade;
+	this->velocidade.y += 1.0 * this->gravidade;
+
 	//Verificar velocidade maxima
 	if (this->velocidade.y > this->velocidadeMaximaY)
 		this->velocidade.y = this->velocidadeMaximaY * ((this->velocidade.y < 0.f)? -1.f : 1.f);
@@ -73,7 +74,7 @@ void ComponenteMovimento::update(const float& td)
 	}
 
 	//Y
-	if (this->velocidade.y > 0.f)	//check for positive y
+	/* if (this->velocidade.y > 0.f)	//check for positive y
 	{
 		//Verificar velocidade maxima
 		if (this->velocidade.y > this->velocidadeMaxima)
@@ -94,7 +95,7 @@ void ComponenteMovimento::update(const float& td)
 		this->velocidade.y += desaceleracao;
 		if (this->velocidade.y > 0.f)
 			this->velocidade.y = 0.f;
-	}
+	}*/
 
 	//Movimentacao Final
 	this->sprite.move(this->velocidade * td);	//usa velocidade

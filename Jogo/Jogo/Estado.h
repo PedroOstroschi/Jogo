@@ -20,7 +20,6 @@ class Estado
 private:
 
 
-
 protected:
 	/*Variaveis*/
 	std::stack<Estado*>* estados;	//Pilha de estados

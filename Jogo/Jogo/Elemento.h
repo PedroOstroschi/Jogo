@@ -5,6 +5,7 @@ private:
 	/*variaveis*/
 	Elemento<TE>* pProximo;
 	TE* item;
+
 public:
 	/*contrutora destrutora*/
 	Elemento();

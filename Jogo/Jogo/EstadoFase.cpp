@@ -1,10 +1,12 @@
 #include "EstadoFase.h"
+#include "ListaEntidade.h"
 
 /*Inicializadores*/
 void EstadoFase::iniElementos()
 {
-	listaEntidades->LEs.push(jogador);
+	/*this->*/listaEntidades->LEs.push(jogador);
 }
+
 void EstadoFase::iniTeclas()
 {
 	std::ifstream ifs("Config/estado_jogo_teclas.ini");
@@ -38,7 +40,7 @@ void EstadoFase::iniJogadores()
 
 /*Construtora e Destrutora*/
 EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo)
+	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(*janela)
 {
 	listaEntidades = new ListaEntidade;
 
@@ -47,7 +49,7 @@ EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::Render
 	this->iniJogadores();
 	this->iniElementos();
 
-
+	listaEntidades = new ListaEntidade;
 }
 
 EstadoFase::~EstadoFase()
@@ -63,7 +65,8 @@ void EstadoFase::fechaEstado()
 
 void EstadoFase::pausaEstado()
 {
-	this->estados->push(new EstadoPausado(this->teclasDisponiveis, this->janela, this->estados));
+	this->pausado = true;
+	//this->estados->push(new EstadoPausado(this->teclasDisponiveis, this->janela, this->estados));
 }
 
 void EstadoFase::atualizaTeclas(const float td)
@@ -80,26 +83,45 @@ void EstadoFase::atualizaTeclas(const float td)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("FECHAR"))))
 		this->sair = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))))
-		this->pausaEstado();
+	{
+		if (!this->pausado)
+			this->pausaEstado();
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("DESPAUSAR"))))
+	{
+		if (this->pausado)
+			this->despausaEstado();
+	}
+		
 }
 
 void EstadoFase::atualiza(const float& td)
 {
-	this->atualizaPosicaoMouse();
-	this->atualizaTeclas(td);
+	if (!this->pausado)	//unpaused update
+	{
+		this->atualizaPosicaoMouse();
+		this->atualizaTeclas(td);
 
-	this->jogador->atualiza(td);
+		this->jogador->atualiza(td);
+	}
+	else	//paused update
+	{
+		this->menupause.atualiza();
+	}
 }
 
 void EstadoFase::renderiza(sf::RenderTarget* alvo)
 {
 	//alvo esta como poonteiro nulo
 	if (alvo == NULL)
-	{
 		alvo = this->janela;
-	}
 
 	this->jogador->renderiza(this->janela);
+
+	if (this->pausado)	//render menu pause
+	{
+		//this->menupause.renderiza(alvo);
+	}
 }
 
 void EstadoFase::salva()
