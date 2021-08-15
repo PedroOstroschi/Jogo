@@ -40,12 +40,14 @@ void EstadoFase::iniJogadores()
 EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
 	:Estado(teclasDisponiveis, janela, estados, cooperativo)
 {
+	listaEntidades = new ListaEntidade;
+
 	this->iniTeclas();
 	this->iniTexturas();
 	this->iniJogadores();
 	this->iniElementos();
 
-	listaEntidades = new ListaEntidade;
+
 }
 
 EstadoFase::~EstadoFase()
