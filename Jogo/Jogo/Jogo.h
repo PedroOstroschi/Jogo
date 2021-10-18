@@ -1,5 +1,5 @@
 #pragma once
-#include"UIManager.h"
+//#include"UIManager.h"
 #include"EstadoFase.h"
 #include"EstadoMenuPrincipal.h"
 #include"ListaEntidade.h"

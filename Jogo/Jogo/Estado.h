@@ -13,7 +13,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
-#include "UIManager.h"
+//#include "UIManager.h"
 
 class Estado
 {
@@ -69,4 +69,5 @@ public:
 	virtual void renderiza(sf::RenderTarget* target = NULL) = 0;
 	virtual void atualizaTecla(const float& td);
 	virtual void atualizaPosicaoMouse();
+	virtual void salva() = 0;
 };

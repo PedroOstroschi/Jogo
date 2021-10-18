@@ -63,9 +63,6 @@
     <ClCompile Include="EstadoFase2.cpp">
       <Filter>Estado</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>Arquivos de Recurso</Filter>
-    </ClCompile>
     <ClCompile Include="Jogador.cpp">
       <Filter>Entidade\Entidades Dinamicas</Filter>
     </ClCompile>
@@ -115,9 +112,6 @@
     </ClInclude>
     <ClInclude Include="EstadoFase2.h">
       <Filter>Estado</Filter>
-    </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Arquivos de Recurso</Filter>
     </ClInclude>
     <ClInclude Include="Jogador.h">
       <Filter>Entidade\Entidades Dinamicas</Filter>

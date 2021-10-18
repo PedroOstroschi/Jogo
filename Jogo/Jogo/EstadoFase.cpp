@@ -40,7 +40,7 @@ void EstadoFase::iniJogadores()
 
 /*Construtora e Destrutora*/
 EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(*janela)
+	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(janela, estados)
 {
 	listaEntidades = new ListaEntidade;
 
@@ -67,6 +67,11 @@ void EstadoFase::pausaEstado()
 {
 	this->pausado = true;
 	//this->estados->push(new EstadoPausado(this->teclasDisponiveis, this->janela, this->estados));
+}
+
+void EstadoFase::despausaEstado()
+{
+	this->pausado = false;
 }
 
 void EstadoFase::atualizaTeclas(const float td)
@@ -97,14 +102,14 @@ void EstadoFase::atualizaTeclas(const float td)
 
 void EstadoFase::atualiza(const float& td)
 {
-	if (!this->pausado)	//unpaused update
+	if (!this->pausado)	//atualiza o jogo despausado
 	{
 		this->atualizaPosicaoMouse();
 		this->atualizaTeclas(td);
 
 		this->jogador->atualiza(td);
 	}
-	else	//paused update
+	else	//atualiza o menu de pausa
 	{
 		this->menupause.atualiza();
 	}
@@ -120,8 +125,31 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 
 	if (this->pausado)	//render menu pause
 	{
-		//this->menupause.renderiza(alvo);
+		this->menupause.renderiza(alvo);
 	}
+}
+
+/*criacao da fase*/
+
+void EstadoFase::gerarFase()
+{
+	for (int i = 0; i < 20; i++)
+	{
+		fgets(LinhaAtual, 100, fase);
+		for (int j = 0; j < strlen(LinhaAtual); j++)
+		{
+			if (LinhaAtual[j] == '1')
+			{
+				Plataforma* temporario;
+				temporario = new Plataforma();
+			}
+			
+		}
+	}
+}
+
+void EstadoFase::gerarObstaculos()
+{
 }
 
 void EstadoFase::salva()

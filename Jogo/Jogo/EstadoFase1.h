@@ -5,7 +5,7 @@ class EstadoFase1 :
     public EstadoFase
 {
 private:
-
+    
 protected:
 
 public:

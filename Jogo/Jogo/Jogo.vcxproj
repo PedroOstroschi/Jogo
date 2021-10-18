@@ -173,7 +173,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuPause.cpp" />
     <ClCompile Include="Plataforma.cpp" />
-    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Botao.h" />
@@ -195,7 +194,6 @@
     <ClInclude Include="ListaPlataforma.h" />
     <ClInclude Include="MenuPause.h" />
     <ClInclude Include="Plataforma.h" />
-    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

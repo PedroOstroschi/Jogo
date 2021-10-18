@@ -1,6 +1,7 @@
-#include"EstadoFase1.h"
+#pragma once
+#include"EstadoFase.h"
 #include"Botao.h"
-#include"UIManager.h"
+//#include"UIManager.h"
 
 class EstadoMenuPrincipal :
 	public Estado
@@ -31,4 +32,5 @@ public:
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void atualizaBotoes();
 	void renderizaBotoes(sf::RenderTarget* alvo = NULL);
+	void salva() {}
 };

@@ -11,3 +11,9 @@ EstadoFase2::~EstadoFase2()
 {
 
 }
+
+void EstadoFase2::terminou()
+{
+	/*salva a pontuacao em um arquivo*/
+
+}

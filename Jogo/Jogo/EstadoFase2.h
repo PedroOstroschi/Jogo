@@ -12,4 +12,7 @@ public:
     /*Construtora e destrutora*/
     EstadoFase2(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);//, cooperativo)
     ~EstadoFase2();
+
+    /*Funcoes*/
+    void terminou();
 };
