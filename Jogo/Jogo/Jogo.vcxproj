@@ -165,6 +165,7 @@
     <ClCompile Include="EstadoFase2.cpp" />
     <ClCompile Include="EstadoFase.cpp" />
     <ClCompile Include="EstadoMenuPrincipal.cpp" />
+    <ClCompile Include="Fase1.cpp" />
     <ClCompile Include="Inimigo1.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="EstadoFase2.h" />
     <ClInclude Include="EstadoFase.h" />
     <ClInclude Include="EstadoMenuPrincipal.h" />
+    <ClInclude Include="Fase1.h" />
     <ClInclude Include="Inimigo1.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />

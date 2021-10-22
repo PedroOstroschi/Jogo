@@ -155,7 +155,7 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//new game
 	if (this->botoes["FASE_1"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
 	}
 	
 	//select stage

@@ -93,6 +93,9 @@
     <ClCompile Include="MenuPause.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Fase1.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Estado.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="MenuPause.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Fase1.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

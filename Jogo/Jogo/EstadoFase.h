@@ -21,14 +21,16 @@ private:
 	ListaEntidade* listaEntidades;
 
 	char LinhaAtual[100];
-	FILE* fase;
+
 
 	/*Funçõees inicializadoras*/
 	void iniElementos();
 	void iniTeclas();
 	void iniTexturas();
 	void iniJogadores();
-
+protected:
+	
+	FILE* fase;
 public:
 	/*Construtora e destrutora*/
 	EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);
@@ -45,7 +47,7 @@ public:
 	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void gerarFase();
-	virtual void gerarInimigos() = 0;
+	void gerarInimigos();
 	void gerarObstaculos();
 
 	/* funcoes para salvar */

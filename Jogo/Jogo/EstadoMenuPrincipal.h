@@ -1,5 +1,5 @@
 #pragma once
-#include"EstadoFase.h"
+#include"Fase1.h"
 #include"Botao.h"
 //#include"UIManager.h"
 

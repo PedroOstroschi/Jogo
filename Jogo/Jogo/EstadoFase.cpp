@@ -133,19 +133,27 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 
 void EstadoFase::gerarFase()
 {
+	ListaEntidade* listaEntidades = getListaEntidade();
+		fgets(LinhaAtual, 100, fase);
 	for (int i = 0; i < 20; i++)
 	{
-		fgets(LinhaAtual, 100, fase);
 		for (int j = 0; j < strlen(LinhaAtual); j++)
 		{
 			if (LinhaAtual[j] == '1')
 			{
 				Plataforma* temporario;
-				temporario = new Plataforma();
+				/*tamanho, posicao*/
+				/*posicao, desCorpo, tamanhoCorpo*/
+				temporario = new Plataforma(sf::Vector2f(((float)j) * 100.0f, ((float)i) * 100.0f), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(100.0f, 100.0f),  false);
+				listaEntidades->LEs
 			}
 			
 		}
 	}
+}
+
+void EstadoFase::gerarInimigos() {
+
 }
 
 void EstadoFase::gerarObstaculos()

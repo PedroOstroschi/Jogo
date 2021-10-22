@@ -5,6 +5,7 @@ Plataforma::Plataforma(sf::Vector2f posicao, sf::Vector2f desCorpo, sf::Vector2f
 	this->corpo.setFillColor(sf::Color::Red); /*Trocar por sprite*/
 	this->corpo.setSize(tamanhoCorpo);
 	this->corpo.setPosition(desCorpo);
+	this->corpo.setOrigin(tamanhoCorpo / 2.0f);
 }
 
 Plataforma::~Plataforma()
