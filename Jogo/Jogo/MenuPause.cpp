@@ -33,9 +33,10 @@ void MenuPause::iniPlanoDeFundo(sf::RenderWindow* janela)
 {
 	
 	this->background.setSize(
-		sf::Vector2f(
-			static_cast<float>(janela->getSize().x),
-			static_cast<float>(janela->getSize().y)
+		sf::Vector2f
+		(
+			static_cast<float>(this->janela->getSize().x),
+			static_cast<float>(this->janela->getSize().y)
 		)
 	);
 
@@ -91,7 +92,7 @@ void MenuPause::renderiza(sf::RenderTarget* alvo)
 
 	for (auto &i : this->botoes)
 	{
-		i.second->render(alvo);
+		i.second->render(*alvo);
 	}
 }
 

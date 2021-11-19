@@ -5,16 +5,19 @@ class Jogador :
 {
 private:
     /*Variaveis*/
-
+    bool attacking;
 
     /*Funcoes Inicializadoras*/
     void iniVariaveis();
     void iniComponentes();
 
 public:
-    Jogador(float x, float y, sf::Texture& textura);
+    Jogador(float x, float y, sf::Texture& texture_sheet);
     virtual ~Jogador();
 
     /*Funcoes*/
+    void updateAttack();
+    void updateAnimation(const float& dt);
+    virtual void atualiza(const float& dt);
 };
 

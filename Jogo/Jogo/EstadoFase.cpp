@@ -27,7 +27,7 @@ void EstadoFase::iniTeclas()
 
 void EstadoFase::iniTexturas()
 {
-	if (!this->textures["PLAYER"].loadFromFile("Resources/Images/Sprites/Players/1Woodcutter/Woodcutter.png"))
+	if (!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Players/Player_1/player_1_sheet.png"))
 	{
 		throw "ERRO::ESTADO_JOGO::NAO_CARREGOU_TEXTURA_PLAYER";
 	}
@@ -35,7 +35,7 @@ void EstadoFase::iniTexturas()
 
 void EstadoFase::iniJogadores()
 {
-	this->jogador = new Jogador(0, 0, this->textures["PLAYER"]);
+	this->jogador = new Jogador(0, 0, this->textures["PLAYER_SHEET"]);
 }
 
 /*Construtora e Destrutora*/
@@ -121,7 +121,7 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 	if (alvo == NULL)
 		alvo = this->janela;
 
-	this->jogador->renderiza(this->janela);
+	this->jogador->renderiza(*janela);
 
 	if (this->pausado)	//render menu pause
 	{
@@ -137,7 +137,7 @@ void EstadoFase::gerarFase()
 		fgets(LinhaAtual, 100, fase);
 	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < strlen(LinhaAtual); j++)
+		for (int j = 0; j < strlen(LinhaAtual); j++)	//unsigned <
 		{
 			if (LinhaAtual[j] == '1')
 			{
@@ -145,7 +145,7 @@ void EstadoFase::gerarFase()
 				/*tamanho, posicao*/
 				/*posicao, desCorpo, tamanhoCorpo*/
 				temporario = new Plataforma(sf::Vector2f(((float)j) * 100.0f, ((float)i) * 100.0f), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(100.0f, 100.0f),  false);
-				listaEntidades->LEs
+				listaEntidades->LEs;
 			}
 			
 		}

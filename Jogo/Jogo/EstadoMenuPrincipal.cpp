@@ -121,8 +121,7 @@ void EstadoMenuPrincipal::renderiza(sf::RenderTarget* alvo)
 
 	alvo->draw(this->planoDeFundo);
 
-	this->renderizaBotoes(alvo);
-
+	this->renderizaBotoes(*alvo);
 
 	//REMOVE
 	sf::Text mouseText;
@@ -149,13 +148,14 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//editor
 	if (this->botoes["EDITOR"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoEditor(this->teclasDisponiveis, this->janela, this->estados));
 	}
 
 	//new game
 	if (this->botoes["FASE_1"]->isPressed())
 	{
-		this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
+		this->estados->push(new EstadoFase1(this->teclasDisponiveis, this->janela, this->estados));
+		//this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
 	}
 	
 	//select stage
@@ -177,7 +177,7 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	}
 }
 
-void EstadoMenuPrincipal::renderizaBotoes(sf::RenderTarget* alvo)
+void EstadoMenuPrincipal::renderizaBotoes(sf::RenderTarget& alvo)
 {
 	for (auto& it : this->botoes)
 	{

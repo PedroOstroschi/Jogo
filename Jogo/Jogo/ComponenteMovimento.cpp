@@ -5,12 +5,11 @@
 
 /*Construtora e Destrutora*/
 ComponenteMovimento::ComponenteMovimento(sf::Sprite& sprite, 
-	float velocidadeMaxima, float aceleracao, float desaceleracao)
+	float velocidadeMaxima, float velocidadeMaximaY, float aceleracao, float desaceleracao)
 	: sprite(sprite),
-	velocidadeMaxima(velocidadeMaxima), aceleracao(aceleracao), desaceleracao(desaceleracao)
+	velocidadeMaxima(velocidadeMaxima), velocidadeMaximaY(velocidadeMaximaY), aceleracao(aceleracao), desaceleracao(desaceleracao)
 {
 	this->gravidade = 40.f;
-	this->velocidadeMaximaY = 15.f;
 }
 
 ComponenteMovimento::~ComponenteMovimento()
@@ -18,9 +17,67 @@ ComponenteMovimento::~ComponenteMovimento()
 
 }
 
+//Accessors
+const sf::Vector2f& HitboxComponent::getPosition() const
+{
+	return this->hitbox.getPosition();
+}
+
+const sf::FloatRect HitboxComponent::getGlobalBounds() const
+{
+	return this->hitbox.getGlobalBounds();
+}
+
+const sf::FloatRect& HitboxComponent::getNextPosition(const sf::Vector2f& velocity)
+{
+	this->nextPosition.left = this->hitbox.getPosition().x + velocity.x;
+	this->nextPosition.top = this->hitbox.getPosition().y + velocity.y;
+
+	return this->nextPosition;
+}
+
+
+const float& ComponenteMovimento::getMaxVelocity() const
+{
+	return this->velocidadeMaxima;
+}
+
 const sf::Vector2f& ComponenteMovimento::getVelocity() const
 {
 	return this->velocidade;
+}
+
+const bool ComponenteMovimento::getState(const short unsigned state) const
+{
+	switch (state)
+	{
+	case IDLE:
+		if (this->velocidade.x == 0.f)//&& this->velocidade.y == 0.f);
+			return true;
+		break;
+
+	case MOVE_LEFT:
+		if (this->velocidade.x < 0.f)
+			return true;
+		break;
+
+	case MOVE_RIGHT:
+		if (this->velocidade.x > 0.f)
+			return true;
+		break;
+
+	case JUMP:
+		if (this->velocidade.y < 0.f)
+			return true;
+		break;
+
+	case FALL:
+		if (this->velocidade.y > 0.f)
+			return true;
+		break;
+	}
+	
+	return false;
 }
 
 /*Funcoes*/
@@ -53,7 +110,7 @@ void ComponenteMovimento::update(const float& td)
 	if (this->velocidade.x > 0.f)	//verifica se x eh positivo
 	{
 		//Verificar velocidade maxima
-		if (this->velocidade.x > this->velocidadeMaxima)
+		if (this->velocidade.x > this->velocidadeMaxima) 
 			this->velocidade.x = this->velocidadeMaxima;
 
 		//desaceleracao

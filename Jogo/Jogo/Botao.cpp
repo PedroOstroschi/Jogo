@@ -90,8 +90,8 @@ void Botao::update(const sf::Vector2f mousePos)
 	}
 }
 
-void Botao::render(sf::RenderTarget* alvo)
+void Botao::render(sf::RenderTarget& alvo)
 {
-	alvo->draw(this->box);
-	alvo->draw(this->texto);
+	alvo.draw(this->box);
+	alvo.draw(this->texto);
 }
