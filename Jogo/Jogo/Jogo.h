@@ -2,7 +2,6 @@
 //#include"UIManager.h"
 #include"EstadoFase.h"
 #include"EstadoMenuPrincipal.h"
-#include"ListaEntidade.h"
 
 class Jogo
 {

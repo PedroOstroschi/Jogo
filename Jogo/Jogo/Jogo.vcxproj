@@ -155,10 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AIFollow.cpp" />
-    <ClCompile Include="AIOption.cpp" />
     <ClCompile Include="Botao.cpp" />
-    <ClCompile Include="Colisor.cpp" />
     <ClCompile Include="ComponenteAnimacao.cpp" />
     <ClCompile Include="ComponenteAtributos.cpp" />
     <ClCompile Include="ComponenteHitbox.cpp" />
@@ -171,13 +168,8 @@
     <ClCompile Include="EstadoFase2.cpp" />
     <ClCompile Include="EstadoFase.cpp" />
     <ClCompile Include="EstadoMenuPrincipal.cpp" />
-    <ClCompile Include="Fase1.cpp" />
-    <ClCompile Include="Inimigo.cpp" />
-    <ClCompile Include="Inimigo1.cpp" />
     <ClCompile Include="Jogador.cpp" />
     <ClCompile Include="Jogo.cpp" />
-    <ClCompile Include="ListaEntidade.cpp" />
-    <ClCompile Include="ListaPlataforma.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuPause.cpp" />
     <ClCompile Include="Plataforma.cpp" />
@@ -186,15 +178,11 @@
     <ClCompile Include="VectorMath.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIFollow.h" />
-    <ClInclude Include="AIOption.h" />
     <ClInclude Include="Botao.h" />
-    <ClInclude Include="Colisor.h" />
     <ClInclude Include="ComponenteAnimacao.h" />
     <ClInclude Include="ComponenteAtributos.h" />
     <ClInclude Include="ComponenteHitbox.h" />
     <ClInclude Include="ComponenteMovimento.h" />
-    <ClInclude Include="Elemento.h" />
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="EntidadeDinamica.h" />
     <ClInclude Include="Estado.h" />
@@ -203,14 +191,8 @@
     <ClInclude Include="EstadoFase2.h" />
     <ClInclude Include="EstadoFase.h" />
     <ClInclude Include="EstadoMenuPrincipal.h" />
-    <ClInclude Include="Fase1.h" />
-    <ClInclude Include="Inimigo.h" />
-    <ClInclude Include="Inimigo1.h" />
     <ClInclude Include="Jogador.h" />
     <ClInclude Include="Jogo.h" />
-    <ClInclude Include="Lista.h" />
-    <ClInclude Include="ListaEntidade.h" />
-    <ClInclude Include="ListaPlataforma.h" />
     <ClInclude Include="MenuPause.h" />
     <ClInclude Include="Plataforma.h" />
     <ClInclude Include="resource.h" />

@@ -1,10 +1,9 @@
 #include "EstadoFase.h"
-#include "ListaEntidade.h"
 
 /*Inicializadores*/
 void EstadoFase::iniElementos()
 {
-	/*this->*/listaEntidades->LEs.push(jogador);
+
 }
 
 void EstadoFase::iniTeclas()
@@ -42,14 +41,12 @@ void EstadoFase::iniJogadores()
 EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
 	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(janela, estados)
 {
-	listaEntidades = new ListaEntidade;
 
 	this->iniTeclas();
 	this->iniTexturas();
 	this->iniJogadores();
 	this->iniElementos();
 
-	listaEntidades = new ListaEntidade;
 }
 
 EstadoFase::~EstadoFase()
@@ -133,23 +130,7 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 
 void EstadoFase::gerarFase()
 {
-	ListaEntidade* listaEntidades = getListaEntidade();
-		fgets(LinhaAtual, 100, fase);
-	for (int i = 0; i < 20; i++)
-	{
-		for (int j = 0; j < strlen(LinhaAtual); j++)	//unsigned <
-		{
-			if (LinhaAtual[j] == '1')
-			{
-				Plataforma* temporario;
-				/*tamanho, posicao*/
-				/*posicao, desCorpo, tamanhoCorpo*/
-				temporario = new Plataforma(sf::Vector2f(((float)j) * 100.0f, ((float)i) * 100.0f), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(100.0f, 100.0f),  false);
-				listaEntidades->LEs;
-			}
-			
-		}
-	}
+//
 }
 
 void EstadoFase::gerarInimigos() {

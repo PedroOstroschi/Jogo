@@ -31,9 +31,6 @@
     <Filter Include="Entidade\Entidades fixas">
       <UniqueIdentifier>{586e2e7e-29df-47ca-8ca7-dbd0ddcb6c7c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lista">
-      <UniqueIdentifier>{413aae72-6b4e-417a-9b87-6ea1f8e336e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{be5b73d8-7165-4c85-a2f4-aa5f9c7a8d83}</UniqueIdentifier>
     </Filter>
@@ -78,26 +75,11 @@
     <ClCompile Include="EntidadeDinamica.cpp">
       <Filter>Entidade\Abstratas</Filter>
     </ClCompile>
-    <ClCompile Include="ListaEntidade.cpp">
-      <Filter>Lista</Filter>
-    </ClCompile>
-    <ClCompile Include="Colisor.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Plataforma.cpp">
       <Filter>Entidade\Entidades fixas</Filter>
     </ClCompile>
-    <ClCompile Include="ListaPlataforma.cpp">
-      <Filter>Lista</Filter>
-    </ClCompile>
-    <ClCompile Include="Inimigo1.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="MenuPause.cpp">
       <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Fase1.cpp">
-      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="ComponenteAnimacao.cpp">
       <Filter>Componentes</Filter>
@@ -111,9 +93,6 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="Inimigo.cpp">
-      <Filter>Entidade\Entidades Dinamicas</Filter>
-    </ClCompile>
     <ClCompile Include="ComponenteAtributos.cpp">
       <Filter>Componentes</Filter>
     </ClCompile>
@@ -122,12 +101,6 @@
     </ClCompile>
     <ClCompile Include="VectorMath.cpp">
       <Filter>Arquivos de Recurso</Filter>
-    </ClCompile>
-    <ClCompile Include="AIFollow.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="AIOption.cpp">
-      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,32 +137,11 @@
     <ClInclude Include="EntidadeDinamica.h">
       <Filter>Entidade\Abstratas</Filter>
     </ClInclude>
-    <ClInclude Include="Elemento.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Lista.h">
-      <Filter>Lista</Filter>
-    </ClInclude>
-    <ClInclude Include="ListaEntidade.h">
-      <Filter>Lista</Filter>
-    </ClInclude>
-    <ClInclude Include="Colisor.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Plataforma.h">
       <Filter>Entidade\Entidades fixas</Filter>
     </ClInclude>
-    <ClInclude Include="ListaPlataforma.h">
-      <Filter>Lista</Filter>
-    </ClInclude>
-    <ClInclude Include="Inimigo1.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="MenuPause.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Fase1.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="ComponenteAnimacao.h">
       <Filter>Componentes</Filter>
@@ -203,9 +155,6 @@
     <ClInclude Include="Tile.h">
       <Filter>Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="Inimigo.h">
-      <Filter>Entidade\Entidades Dinamicas</Filter>
-    </ClInclude>
     <ClInclude Include="ComponenteAtributos.h">
       <Filter>Componentes</Filter>
     </ClInclude>
@@ -217,12 +166,6 @@
     </ClInclude>
     <ClInclude Include="VectorMath.h">
       <Filter>Arquivos de Recurso</Filter>
-    </ClInclude>
-    <ClInclude Include="AIFollow.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="AIOption.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

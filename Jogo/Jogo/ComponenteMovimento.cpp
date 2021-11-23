@@ -1,4 +1,5 @@
 #include "ComponenteMovimento.h"
+#include "ComponenteHitbox.h"
 
 /*Funcoes Inicializadoras*/
 
@@ -18,23 +19,6 @@ ComponenteMovimento::~ComponenteMovimento()
 }
 
 //Accessors
-const sf::Vector2f& HitboxComponent::getPosition() const
-{
-	return this->hitbox.getPosition();
-}
-
-const sf::FloatRect HitboxComponent::getGlobalBounds() const
-{
-	return this->hitbox.getGlobalBounds();
-}
-
-const sf::FloatRect& HitboxComponent::getNextPosition(const sf::Vector2f& velocity)
-{
-	this->nextPosition.left = this->hitbox.getPosition().x + velocity.x;
-	this->nextPosition.top = this->hitbox.getPosition().y + velocity.y;
-
-	return this->nextPosition;
-}
 
 
 const float& ComponenteMovimento::getMaxVelocity() const
@@ -97,7 +81,7 @@ void ComponenteMovimento::update(const float& td)
 
 	/*Aplica gravidade*/
 
-	this->velocidade.y += 1.0 * this->gravidade;
+	// this->velocidade.y += 1.0 * this->gravidade;
 
 	//Verificar velocidade maxima
 	if (this->velocidade.y > this->velocidadeMaximaY)

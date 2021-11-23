@@ -1,7 +1,6 @@
 #pragma once
 #include "Estado.h"
 #include "Jogador.h"
-#include "ListaEntidade.h"
 #include "MenuPause.h"
 
 #include"Plataforma.h"
@@ -18,7 +17,6 @@ private:
 
 	/*Variaveis*/
 	Jogador* jogador;
-	ListaEntidade* listaEntidades;
 
 	char LinhaAtual[100];
 
@@ -37,7 +35,6 @@ public:
 	virtual ~EstadoFase();
 
 	/*set e get*/
-	ListaEntidade* getListaEntidade() { return listaEntidades; }
 
 	/*Funções*/
 	void fechaEstado();

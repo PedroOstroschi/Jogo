@@ -1,5 +1,4 @@
 #pragma once
-#include"Fase1.h"
 #include"EstadoEditor.h"
 #include"EstadoFase1.h"
 #include"Botao.h"

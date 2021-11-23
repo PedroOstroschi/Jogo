@@ -40,19 +40,19 @@ void MenuPause::iniPlanoDeFundo(sf::RenderWindow* janela)
 		)
 	);
 
-	this->background.setFillColor(sf::Color::Red);
+	this->background.setFillColor(sf::Color(20, 20, 20 ,100));
 
 	//inicia container
 	this->container.setSize(
 		sf::Vector2f(
 			static_cast<float>(janela->getSize().x) / 4.f,
-			static_cast<float>(janela->getSize().y)
+			static_cast<float>(janela->getSize().y) -60.f
 		)
 	);
-	this->container.setFillColor(sf::Color::Blue);
+	this->container.setFillColor(sf::Color(20, 20, 20, 200));
 	this->container.setPosition(
 		static_cast<float>(janela->getSize().x) / 2.f - this->container.getSize().x / 2.f,
-		0.f
+		30.f
 	);
 }
 

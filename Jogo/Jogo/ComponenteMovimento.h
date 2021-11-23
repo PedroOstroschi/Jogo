@@ -1,4 +1,5 @@
 #include"SFML/Graphics.hpp"
+#include "ComponenteHitbox.h"
 
 enum movement_states { IDLE = 0, MOVE_LEFT, MOVE_RIGHT, JUMP, FALL };
 
