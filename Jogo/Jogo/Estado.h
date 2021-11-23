@@ -34,8 +34,6 @@ protected:
 
 	sf::Font font;
 
-	//UIManager* ui_manager;
-
 	int pontuacao;
 
 	/*Flags*/
@@ -43,6 +41,9 @@ protected:
 	bool cooperativo; //para iniciar o modo de 2 jogadores
 	bool ganhou;
 	bool pausado;
+
+	float keytime;
+	float keytimemax;
 
 	/*Funçõees inicializadoras*/
 	virtual void iniTeclas() = 0; // cada estado vai definir a utilizacao das teclas
@@ -60,14 +61,17 @@ public:
 	const bool& getPausado() const;
 	void setPontuacao(const int pont);
 	const int getPontuacao();
+	const bool& getKeytime();
 
 	/*Funções*/
 	void fechaEstado();
 	void pausaEstado();
 	void despausaEstado();
+
 	virtual void atualiza(const float& td) = 0;
 	virtual void renderiza(sf::RenderTarget* target = NULL) = 0;
 	virtual void atualizaTecla(const float& td);
 	virtual void atualizaPosicaoMouse();
+	virtual void updateKeyTime(const float& td);
 	virtual void salva() = 0;
 };

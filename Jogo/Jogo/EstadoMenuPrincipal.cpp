@@ -44,28 +44,28 @@ void EstadoMenuPrincipal::iniTeclas()
 
 void EstadoMenuPrincipal::iniBotoes()
 {
-	this->botoes["EDITOR"] = new Botao(200, 200, 200, 200,
+	this->botoes["EDITOR"] = new gui::Botao(200.f, 200.f, 200.f, 200.f,
 		&this->font, "EDITOR", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));	
+		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200)
+	);	
 	
-	
-	this->botoes["FASE_1"] = new Botao(802, 700, 150, 50,
+	this->botoes["FASE_1"] = new gui::Botao(802.f, 700.f, 150.f, 50.f,
 		&this->font, "Novo Jogo", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 	
-	this->botoes["FASE_2"] = new Botao(970, 700, 150, 50,
+	this->botoes["FASE_2"] = new gui::Botao(970.f, 700.f, 150.f, 50.f,
 		&this->font, "Selecionar Fase", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 		
-	this->botoes["CONFIG"] = new Botao(802, 770, 150, 50,
+	this->botoes["CONFIG"] = new gui::Botao(802.f, 770.f, 150.f, 50.f,
 		&this->font, "Configurações", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 
-	this->botoes["SAIR"] = new Botao(970, 770, 150, 50,
+	this->botoes["SAIR"] = new gui::Botao(970.f, 770.f, 150.f, 50.f,
 		&this->font, "Sair", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
@@ -75,7 +75,6 @@ void EstadoMenuPrincipal::iniBotoes()
 EstadoMenuPrincipal::EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)// , UIManager* ui_manager)
 	:Estado(teclasDisponiveis, janela, estados, cooperativo)
 {
-	//this->ui_manager = ui_manager;
 	this->initVariaveis();
 	this->initPlanoDeFundo();
 	this->iniFontes();
@@ -167,7 +166,7 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//config menu
 	if (this->botoes["CONFIG"]->isPressed())
 	{
-		/*TODO*/
+		this->estados->push(new EstadoConfig(this->teclasDisponiveis, this->janela, this->estados));
 	}
 
 	//quit the game

@@ -54,7 +54,7 @@
     <ClCompile Include="EstadoMenuPrincipal.cpp">
       <Filter>Estado</Filter>
     </ClCompile>
-    <ClCompile Include="Botao.cpp">
+    <ClCompile Include="GUI.cpp">
       <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
     <ClCompile Include="EstadoFase1.cpp">
@@ -102,6 +102,9 @@
     <ClCompile Include="VectorMath.cpp">
       <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoConfig.cpp">
+      <Filter>Estado</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Estado.h">
@@ -113,7 +116,7 @@
     <ClInclude Include="EstadoMenuPrincipal.h">
       <Filter>Estado</Filter>
     </ClInclude>
-    <ClInclude Include="Botao.h">
+    <ClInclude Include="GUI.h">
       <Filter>Arquivos de Recurso</Filter>
     </ClInclude>
     <ClInclude Include="EstadoFase1.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="VectorMath.h">
       <Filter>Arquivos de Recurso</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoConfig.h">
+      <Filter>Estado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

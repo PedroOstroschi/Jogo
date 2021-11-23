@@ -155,7 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Botao.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ComponenteAnimacao.cpp" />
     <ClCompile Include="ComponenteAtributos.cpp" />
     <ClCompile Include="ComponenteHitbox.cpp" />
@@ -163,6 +163,7 @@
     <ClCompile Include="Entidade.cpp" />
     <ClCompile Include="EntidadeDinamica.cpp" />
     <ClCompile Include="Estado.cpp" />
+    <ClCompile Include="EstadoConfig.cpp" />
     <ClCompile Include="EstadoEditor.cpp" />
     <ClCompile Include="EstadoFase1.cpp" />
     <ClCompile Include="EstadoFase2.cpp" />
@@ -178,7 +179,7 @@
     <ClCompile Include="VectorMath.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Botao.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="ComponenteAnimacao.h" />
     <ClInclude Include="ComponenteAtributos.h" />
     <ClInclude Include="ComponenteHitbox.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Entidade.h" />
     <ClInclude Include="EntidadeDinamica.h" />
     <ClInclude Include="Estado.h" />
+    <ClInclude Include="EstadoConfig.h" />
     <ClInclude Include="EstadoEditor.h" />
     <ClInclude Include="EstadoFase1.h" />
     <ClInclude Include="EstadoFase2.h" />

@@ -2,14 +2,14 @@
 #define ESTADOEDITOR_H
 
 #include "Estado.h"
-#include "Botao.h"
+#include "GUI.h"
 
 class EstadoEditor :
     public Estado
 {
 private:
 	/*Variaveis*/
-	std::map<std::string, Botao*> botoes;
+	std::map<std::string, gui::Botao*> botoes;
 
 	/*Funçõees inicializadoras*/
 	void initVariaveis();

@@ -13,19 +13,21 @@ class EstadoFase :
 private:
 	
 
-	MenuPause menupause;
+
+	MenuPause* menupause;
 
 	/*Variaveis*/
 	Jogador* jogador;
-
-	char LinhaAtual[100];
-
+	sf::Texture texture;
 
 	/*Funçõees inicializadoras*/
 	void iniElementos();
 	void iniTeclas();
+	void iniFontes();
 	void iniTexturas();
 	void iniJogadores();
+	void initPauseMenu();
+
 protected:
 	
 	FILE* fase;
@@ -40,12 +42,14 @@ public:
 	void fechaEstado();
 	void pausaEstado();
 	void despausaEstado();
-	void atualizaTeclas(const float td);
+	void updatePlayerInput(const float td);
+	void updatePauseMenuButtons();
 	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void gerarFase();
 	void gerarInimigos();
 	void gerarObstaculos();
+	void updateInput(const float& td);
 
 	/* funcoes para salvar */
 

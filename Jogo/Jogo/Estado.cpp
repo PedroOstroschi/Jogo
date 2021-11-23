@@ -11,6 +11,8 @@ Estado::Estado(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* 
 	this->pausado = false;
 	this->pontuacao = 0;
 	this->estados = estados;
+	this->keytime = 0.f;
+	this->keytimemax = 10.f;
 }
 
 Estado:: ~Estado()
@@ -35,6 +37,17 @@ void Estado::setPontuacao(const int pont)
 const int Estado::getPontuacao()
 {
 	return this->pontuacao;
+}
+
+const bool& Estado::getKeytime()
+{
+	if (this->keytime >= keytimemax)
+	{
+		this->keytime = 0.f;
+		return true;
+	}
+
+	return false;
 }
 
 /*Funções*/
@@ -64,6 +77,12 @@ void Estado::atualizaPosicaoMouse()
 	this->mousePosScreen = sf::Mouse::getPosition();
 	this->mousePosWindow = sf::Mouse::getPosition(*this->janela);
 	this->mousePosView = this->janela->mapPixelToCoords(sf::Mouse::getPosition(*this->janela));
+}
+
+void Estado::updateKeyTime(const float& td)
+{
+	if (this->keytime < this->keytimemax)
+		this->keytime += 100.f * td;
 }
 
 void Estado::iniFontes()

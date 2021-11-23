@@ -24,12 +24,29 @@ void EstadoFase::iniTeclas()
 	ifs.close();
 }
 
+void EstadoFase::iniFontes()
+{
+	if (!this->font.loadFromFile("Fonts/comic.ttf"))
+	{
+		throw("nao carregou fonte");
+	}
+}
+
 void EstadoFase::iniTexturas()
 {
 	if (!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Players/Player_1/player_1_sheet.png"))
 	{
 		throw "ERRO::ESTADO_JOGO::NAO_CARREGOU_TEXTURA_PLAYER";
 	}
+}
+
+void EstadoFase::initPauseMenu()
+{
+	this->menupause = new MenuPause(this->janela, this->font);
+
+	this->menupause->addButton("DESPAUSAR", 600.f, "DESPAUSAR");
+	this->menupause->addButton("SALVAR", 700.f, "SALVAR");
+	this->menupause->addButton("SAIR", 800.f, "SAIR");
 }
 
 void EstadoFase::iniJogadores()
@@ -39,11 +56,14 @@ void EstadoFase::iniJogadores()
 
 /*Construtora e Destrutora*/
 EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(janela, estados)
+	:Estado(teclasDisponiveis, janela, estados, cooperativo)
 {
 
 	this->iniTeclas();
+	this->iniFontes();
 	this->iniTexturas();
+	this->initPauseMenu();
+
 	this->iniJogadores();
 	this->iniElementos();
 
@@ -52,6 +72,7 @@ EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::Render
 EstadoFase::~EstadoFase()
 {
 	delete this->jogador;
+	delete this->menupause;
 }
 
 /*Funções*/
@@ -71,7 +92,7 @@ void EstadoFase::despausaEstado()
 	this->pausado = false;
 }
 
-void EstadoFase::atualizaTeclas(const float td)
+void EstadoFase::updatePlayerInput(const float td)
 {
 	//atualiza entrada do jogador
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_ESQ"))))
@@ -84,31 +105,40 @@ void EstadoFase::atualizaTeclas(const float td)
 		this->jogador->move(1.f, 0.f, td);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("FECHAR"))))
 		this->sair = true;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))))
-	{
-		if (!this->pausado)
-			this->pausaEstado();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("DESPAUSAR"))))
-	{
-		if (this->pausado)
-			this->despausaEstado();
-	}
+
 		
+}
+
+void EstadoFase::updatePauseMenuButtons()
+{
+	if (this->menupause->isButtonPressed("SAIR"))
+		this->estados->top()->fechaEstado();
+
+	if (this->menupause->isButtonPressed("DESPAUSAR"))
+		this->estados->top()->despausaEstado();
+
+	if (this->menupause->isButtonPressed("SALVAR"))
+		this->estados->top()->salva();
+
 }
 
 void EstadoFase::atualiza(const float& td)
 {
+	this->atualizaPosicaoMouse();
+	this->updateKeyTime(td);
+	this->updateInput(td);
+
 	if (!this->pausado)	//atualiza o jogo despausado
 	{
-		this->atualizaPosicaoMouse();
-		this->atualizaTeclas(td);
+		this->updatePlayerInput(td);
 
 		this->jogador->atualiza(td);
 	}
 	else	//atualiza o menu de pausa
 	{
-		this->menupause.atualiza();
+		this->menupause->atualiza(this->mousePosView);
+
+		this->updatePauseMenuButtons();
 	}
 }
 
@@ -122,7 +152,7 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 
 	if (this->pausado)	//render menu pause
 	{
-		this->menupause.renderiza(alvo);
+		this->menupause->renderiza(*alvo);
 	}
 }
 
@@ -139,6 +169,17 @@ void EstadoFase::gerarInimigos() {
 
 void EstadoFase::gerarObstaculos()
 {
+}
+
+void EstadoFase::updateInput(const float& td)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))) && this->getKeytime())
+	{
+		if (!this->pausado)
+			this->pausaEstado();
+		else
+			this->despausaEstado();
+	}
 }
 
 void EstadoFase::salva()

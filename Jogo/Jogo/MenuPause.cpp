@@ -3,21 +3,7 @@
 /*inicializadoras*/
 void MenuPause::iniBotoes()
 {
-	this->botoes["DESPAUSAR"] = new Botao(802, 700, 150, 50,
-		&this->font, "Despausar", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 
-	this->botoes["SALVAR"] = new Botao(970, 700, 150, 50,
-		&this->font, "Salvar", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
-
-
-	this->botoes["SAIR"] = new Botao(970, 770, 150, 50,
-		&this->font, "Sair", 24,
-		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 }
 
 void MenuPause::iniFontes()
@@ -46,18 +32,19 @@ void MenuPause::iniPlanoDeFundo(sf::RenderWindow* janela)
 	this->container.setSize(
 		sf::Vector2f(
 			static_cast<float>(janela->getSize().x) / 4.f,
-			static_cast<float>(janela->getSize().y) -60.f
+			static_cast<float>(janela->getSize().y) - 60.f
 		)
 	);
 	this->container.setFillColor(sf::Color(20, 20, 20, 200));
 	this->container.setPosition(
 		static_cast<float>(janela->getSize().x) / 2.f - this->container.getSize().x / 2.f,
-		30.f
+		0
 	);
 }
 
 /*Construtora e Destrutora*/
-MenuPause::MenuPause(sf::RenderWindow* janela, std::stack<Estado*>* estados)
+MenuPause::MenuPause(sf::RenderWindow* janela, sf::Font& font)
+	:font(font)
 {
 	this->janela = janela;
 	this->estados = estados;
@@ -65,6 +52,14 @@ MenuPause::MenuPause(sf::RenderWindow* janela, std::stack<Estado*>* estados)
 	this->iniFontes();
 	this->iniPlanoDeFundo(janela);
 
+	this->textoMenuPause.setFont(font);
+	this->textoMenuPause.setFillColor(sf::Color::White);
+	this->textoMenuPause.setCharacterSize(60);
+	this->textoMenuPause.setString("PAUSADO");
+	this->textoMenuPause.setPosition(
+		this->container.getPosition().x + this->container.getSize().x / 2.f - this->textoMenuPause.getGlobalBounds().width / 2.f,
+		this->container.getPosition().y + 40.f
+	);
 }
 
 MenuPause::~MenuPause()
@@ -76,24 +71,54 @@ MenuPause::~MenuPause()
 	}
 }
 
+std::map<std::string, gui::Botao*>& MenuPause::getButtons()
+{
+	return this->botoes;
+}
 
 /*Funções*/
-void MenuPause::atualiza()
+const bool MenuPause::isButtonPressed(const std::string key) 
+{
+	return this->botoes[key]->isPressed();
+}
+
+void MenuPause::addButton(const std::string key, float y, const std::string text)
+{
+	float width = 250.f;
+	float height = 50.f;
+	float x = this->container.getPosition().x + this->container.getSize().x / 2.f - width / 2.f;
+
+	this->botoes[key] = new gui::Botao(
+		x, y, width, height,
+		&this->font, text, 50,
+		sf::Color(70, 70, 70, 200), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0)
+	);
+}
+
+void MenuPause::atualiza(const sf::Vector2f& mousePos)
 {
 	atualizaBotoes();
 	atualizaPosicaoMouse();
 
+	for (auto& i : this->botoes)
+	{
+		i.second->update(mousePos);
+	}
+
 }
 
-void MenuPause::renderiza(sf::RenderTarget* alvo)
+void MenuPause::renderiza(sf::RenderTarget& alvo)
 {
-	alvo->draw(background);
-	alvo->draw(container);
+	alvo.draw(this->background);
+	alvo.draw(this->container);
 
 	for (auto &i : this->botoes)
 	{
-		i.second->render(*alvo);
+		i.second->render(alvo);
 	}
+
+	alvo.draw(this->textoMenuPause);
 }
 
 void MenuPause::atualizaBotoes()
@@ -103,24 +128,6 @@ void MenuPause::atualizaBotoes()
 	for (auto& it : this->botoes)
 	{
 		it.second->update(this->mousePosView);
-	}
-
-	//editor
-	if (this->botoes["DESPAUSAR"]->isPressed())
-	{
-		this->estados->top()->despausaEstado();
-	}
-
-	//new game
-	if (this->botoes["SALVAR"]->isPressed())
-	{
-		this->estados->top()->salva();
-	}
-
-	//quit the game
-	if (this->botoes["SAIR"]->isPressed())
-	{
-		this->estados->top()->fechaEstado();
 	}
 }
 

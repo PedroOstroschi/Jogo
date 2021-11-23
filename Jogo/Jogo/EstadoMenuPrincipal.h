@@ -1,8 +1,8 @@
 #pragma once
-#include"EstadoEditor.h"
-#include"EstadoFase1.h"
-#include"Botao.h"
-
+#include "EstadoEditor.h"
+#include "EstadoFase1.h"
+#include "EstadoConfig.h"
+#include "GUI.h"
 class EstadoMenuPrincipal :
 	public Estado
 {
@@ -11,7 +11,7 @@ private:
 	sf::Texture texturaPlanoDeFundo;
 	sf::RectangleShape planoDeFundo;
 
-	std::map<std::string, Botao*> botoes;
+	std::map<std::string, gui::Botao*> botoes;
 
 	/*Funçõees inicializadoras*/
 	void initVariaveis();
@@ -29,9 +29,9 @@ public:
 
 	/*Funções*/
 	void atualizaTeclas(const float td);
-	void atualiza(const float& td) override; //chama atualizaTecla
-	void renderiza(sf::RenderTarget* alvo = NULL);
 	void atualizaBotoes();
+	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderizaBotoes(sf::RenderTarget& alvo);
+	void renderiza(sf::RenderTarget* alvo = NULL);
 	void salva() {}
 };
