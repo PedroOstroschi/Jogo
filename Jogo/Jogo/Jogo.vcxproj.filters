@@ -28,14 +28,14 @@
     <Filter Include="Entidade\Abstratas">
       <UniqueIdentifier>{813ed116-3571-470d-bab1-9f54def53f63}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entidade\Entidades fixas">
-      <UniqueIdentifier>{586e2e7e-29df-47ca-8ca7-dbd0ddcb6c7c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{be5b73d8-7165-4c85-a2f4-aa5f9c7a8d83}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tiles">
       <UniqueIdentifier>{866b17c8-4a42-4f10-a167-77bb241f71f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mapa">
+      <UniqueIdentifier>{8ec4ebf1-65df-4de4-bed5-0b19227ea96e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +75,6 @@
     <ClCompile Include="EntidadeDinamica.cpp">
       <Filter>Entidade\Abstratas</Filter>
     </ClCompile>
-    <ClCompile Include="Plataforma.cpp">
-      <Filter>Entidade\Entidades fixas</Filter>
-    </ClCompile>
     <ClCompile Include="MenuPause.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -104,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="EstadoConfig.cpp">
       <Filter>Estado</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Mapa</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +143,6 @@
     <ClInclude Include="EntidadeDinamica.h">
       <Filter>Entidade\Abstratas</Filter>
     </ClInclude>
-    <ClInclude Include="Plataforma.h">
-      <Filter>Entidade\Entidades fixas</Filter>
-    </ClInclude>
     <ClInclude Include="MenuPause.h">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -172,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="EstadoConfig.h">
       <Filter>Estado</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Mapa</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSettings.h">
+      <Filter>Arquivos de Recurso</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

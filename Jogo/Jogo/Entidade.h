@@ -1,8 +1,4 @@
 #pragma once
-#include <stdlib.h>
-#include <iostream>
-
-#include"SFML/Graphics.hpp"
 #include"ComponenteHitbox.h"
 #include"ComponenteAtributos.h"
 

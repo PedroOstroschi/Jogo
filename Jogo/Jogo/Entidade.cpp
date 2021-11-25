@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Entidade.h"
 
 void Entidade::initVariaveis()

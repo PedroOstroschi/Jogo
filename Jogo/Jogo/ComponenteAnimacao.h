@@ -2,15 +2,6 @@
 #define COMPONENTEANIMACAO_H
 #pragma once
 
-#include<map>
-#include<iostream>
-
-#include"SFML/System.hpp"
-#include"SFML/Window.hpp"
-#include"SFML/Graphics.hpp"
-#include"SFML/Audio.hpp"
-#include"SFML/Network.hpp"
-
 class ComponenteAnimacao
 {
 private:

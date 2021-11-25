@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Jogador.h"
 
 /*Funcoes Inicializadoras*/
@@ -19,20 +20,20 @@ Jogador::Jogador(float x, float y, sf::Texture& texture_sheet)
 
 	this->setPosition(x, y);
 
-	this->createHitboxComponent(this->sprite, 110.f, 95.f, 53.f, 79.f);
+	this->createHitboxComponent(this->sprite, 165.f, 140.f, 81.f, 120.f);
 	this->createMovementComponent(500.f, 40.f, 250.f, 100.f);
 	this->createAnimationComponent(texture_sheet);
 
 	//"key",					animation_timer, start_frame_x, start_frame_y, frames_x, frames_y, width, height)
-	this->componenteAnimacao->addAnimation("IDLE", 10.f, 0, 0, 9, 0, 270, 270);
-	this->componenteAnimacao->addAnimation("WALK", 5.f, 0, 4, 5, 4, 270, 270);
-	this->componenteAnimacao->addAnimation("JUMP", 10.f, 8, 3, 1, 3, 270, 270);
-	this->componenteAnimacao->addAnimation("FALL", 10.f, 8, 2, 1, 2, 270, 270);
-	this->componenteAnimacao->addAnimation("ATK1", 7.f, 0, 2, 3, 2, 270, 270);
-	this->componenteAnimacao->addAnimation("ATK2", 10.f, 4, 2, 3, 2, 270, 270);
-	this->componenteAnimacao->addAnimation("ATK3", 10.f, 0, 3, 4, 3, 270, 270);
-	this->componenteAnimacao->addAnimation("DEAD", 10.f, 0, 1, 8, 1, 270, 270);
-	this->componenteAnimacao->addAnimation("HIT", 10.f, 5, 3, 2, 3, 270, 270);
+	this->componenteAnimacao->addAnimation("IDLE", 10.f, 0, 0, 9, 0, 405, 405);
+	this->componenteAnimacao->addAnimation("WALK", 5.f, 0, 4, 5, 4, 405, 405);
+	this->componenteAnimacao->addAnimation("JUMP", 10.f, 8, 3, 1, 3, 405, 405);
+	this->componenteAnimacao->addAnimation("FALL", 10.f, 8, 2, 1, 2, 405, 405);
+	this->componenteAnimacao->addAnimation("ATK1", 7.f, 0, 2, 3, 2, 405, 405);
+	this->componenteAnimacao->addAnimation("ATK2", 10.f, 4, 2, 3, 2, 405, 405);
+	this->componenteAnimacao->addAnimation("ATK3", 10.f, 0, 3, 4, 3, 405, 405);
+	this->componenteAnimacao->addAnimation("DEAD", 10.f, 0, 1, 8, 1, 405, 405);
+	this->componenteAnimacao->addAnimation("HIT", 10.f, 5, 3, 2, 3, 405, 405);
 }
 
 Jogador::~Jogador()
@@ -66,7 +67,7 @@ void Jogador::updateAnimation(const float& dt)
 	{
 		if (this->sprite.getScale().x > 0.f)
 		{
-			this->sprite.setOrigin(270.f, 0.f);
+			this->sprite.setOrigin(405.f, 0.f);
 			this->sprite.setScale(-1.f, 1.f);
 		}
 

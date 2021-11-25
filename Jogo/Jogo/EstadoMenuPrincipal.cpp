@@ -1,4 +1,7 @@
+#include "stdafx.h"
 #include "EstadoMenuPrincipal.h"
+#include "GraphicsSettings.h"
+#include "GUI.h"
 
 /*Inicializadores*/
 void EstadoMenuPrincipal::initVariaveis()
@@ -72,8 +75,8 @@ void EstadoMenuPrincipal::iniBotoes()
 }
 
 /*Construtora e Destrutora*/
-EstadoMenuPrincipal::EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)// , UIManager* ui_manager)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo)
+EstadoMenuPrincipal::EstadoMenuPrincipal(DataEstado* data_estado)
+	: Estado(data_estado)
 {
 	this->initVariaveis();
 	this->initPlanoDeFundo();
@@ -147,26 +150,26 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//editor
 	if (this->botoes["EDITOR"]->isPressed())
 	{
-		this->estados->push(new EstadoEditor(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoEditor(this->dataEstado));
 	}
 
 	//new game
 	if (this->botoes["FASE_1"]->isPressed())
 	{
-		this->estados->push(new EstadoFase1(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoFase1(this->dataEstado));
 		//this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
 	}
 	
 	//select stage
 	if (this->botoes["FASE_2"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoFase(this->dataEstado));
 	}
 	
 	//config menu
 	if (this->botoes["CONFIG"]->isPressed())
 	{
-		this->estados->push(new EstadoConfig(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoConfig(this->dataEstado));
 	}
 
 	//quit the game

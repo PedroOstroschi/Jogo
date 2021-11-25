@@ -10,7 +10,7 @@ protected:
 
 public:
     /*Construtora e destrutora*/
-    EstadoFase2(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);//, cooperativo)
+    EstadoFase2(DataEstado* data_estado);//, cooperativo)
     ~EstadoFase2();
 
     /*Funcoes*/

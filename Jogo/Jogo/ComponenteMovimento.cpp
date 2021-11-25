@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "ComponenteMovimento.h"
 #include "ComponenteHitbox.h"
 

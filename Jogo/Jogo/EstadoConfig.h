@@ -5,6 +5,7 @@
 
 #include "Estado.h"
 #include "GUI.h"
+#include "GraphicsSettings.h"
 
 class EstadoConfig :
 	public Estado
@@ -29,7 +30,7 @@ private:
 	void iniTexto();
 
 public:
-	EstadoConfig(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);
+	EstadoConfig(DataEstado* data_estado);
 	virtual ~EstadoConfig();
 
 	//Accessors

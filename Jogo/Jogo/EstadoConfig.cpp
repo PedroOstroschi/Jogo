@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include "EstadoConfig.h"
+#include "GraphicsSettings.h"
 
 //init
 void EstadoConfig::initVariaveis()
@@ -83,8 +85,8 @@ void EstadoConfig::iniTexto()
 }
 
 //c&d
-EstadoConfig::EstadoConfig(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	: Estado(teclasDisponiveis, janela, estados, cooperativo)
+EstadoConfig::EstadoConfig(DataEstado* data_estado)
+	: Estado(data_estado)
 {
 	this->initVariaveis();
 	this->initPlanoDeFundo();
@@ -139,7 +141,9 @@ void EstadoConfig::atualizaGui(const float td)
 	//aplicar
 	if (this->botoes["APPLY"]->isPressed())
 	{
-		this->janela->create(this->modes[this->dropDownListas["RESOLUTION"]->getActiveElementdId()], "teste", sf::Style::Default);
+		this->dataEstado->gfxSettings->resolution = this->modes[this->dropDownListas["RESOLUTION"]->getActiveElementdId()];
+		
+		this->janela->create(this->dataEstado->gfxSettings->resolution, this->dataEstado->gfxSettings->title, sf::Style::Default);
 	}
 
 	//DDL

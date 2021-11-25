@@ -1,24 +1,22 @@
 #pragma once
+#include "stdafx.h"
 #include "Estado.h"
 #include "Jogador.h"
 #include "MenuPause.h"
-
-#include"Plataforma.h"
-
-#include <stack>
+#include "TileMap.h"
 
 class EstadoFase :
 	public Estado
 {
 private:
-	
-
 
 	MenuPause* menupause;
 
 	/*Variaveis*/
 	Jogador* jogador;
 	sf::Texture texture;
+
+	TileMap* tileMap;
 
 	/*Funçõees inicializadoras*/
 	void iniElementos();
@@ -27,13 +25,14 @@ private:
 	void iniTexturas();
 	void iniJogadores();
 	void initPauseMenu();
+	void iniTileMap();
 
 protected:
 	
 	FILE* fase;
 public:
 	/*Construtora e destrutora*/
-	EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);
+	EstadoFase(DataEstado* data_estado );
 	virtual ~EstadoFase();
 
 	/*set e get*/

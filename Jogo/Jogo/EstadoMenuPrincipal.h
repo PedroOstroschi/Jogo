@@ -1,8 +1,12 @@
-#pragma once
+#ifndef ESTADOMENUPRINCIPAL_H
+#define ESTADOMENUPRINCIPAL_H
+
 #include "EstadoEditor.h"
 #include "EstadoFase1.h"
 #include "EstadoConfig.h"
 #include "GUI.h"
+#include "GraphicsSettings.h"
+
 class EstadoMenuPrincipal :
 	public Estado
 {
@@ -24,7 +28,7 @@ protected:
 
 public:
 	/*Construtora e destrutora*/
-	EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados);// , UIManager* ui_manager);
+	EstadoMenuPrincipal(DataEstado* data_estado);
 	virtual ~EstadoMenuPrincipal();
 
 	/*Funções*/
@@ -35,3 +39,5 @@ public:
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void salva() {}
 };
+
+#endif

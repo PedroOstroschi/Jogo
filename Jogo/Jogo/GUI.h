@@ -1,7 +1,7 @@
 #ifndef GUI_H
 #define GUI_H
+#include "stdafx.h"
 #include"Estado.h"
-#include<vector>
 
 enum status_botao { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
 

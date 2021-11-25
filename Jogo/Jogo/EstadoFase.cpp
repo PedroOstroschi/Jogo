@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "EstadoFase.h"
 
 /*Inicializadores*/
@@ -54,9 +55,14 @@ void EstadoFase::iniJogadores()
 	this->jogador = new Jogador(0, 0, this->textures["PLAYER_SHEET"]);
 }
 
+void EstadoFase::iniTileMap()
+{
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 10, 10);
+}
+
 /*Construtora e Destrutora*/
-EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo)
+EstadoFase::EstadoFase(DataEstado* data_estado)
+	:Estado(data_estado)
 {
 
 	this->iniTeclas();
@@ -65,14 +71,15 @@ EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::Render
 	this->initPauseMenu();
 
 	this->iniJogadores();
+	this->iniTileMap();
 	this->iniElementos();
-
 }
 
 EstadoFase::~EstadoFase()
 {
 	delete this->jogador;
 	delete this->menupause;
+	delete this->tileMap;
 }
 
 /*Funções*/
@@ -147,6 +154,8 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 	//alvo esta como poonteiro nulo
 	if (alvo == NULL)
 		alvo = this->janela;
+
+	//this->map.render(*alvo);
 
 	this->jogador->renderiza(*janela);
 

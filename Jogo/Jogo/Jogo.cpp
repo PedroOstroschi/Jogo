@@ -1,6 +1,6 @@
-// Jogo.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
-
+#include "stdafx.h"
 #include "Jogo.h"
+#include "GraphicsSettings.h"
 
 /*Inicializadores*/
 
@@ -13,46 +13,39 @@
 void Jogo::iniVariaveis()
 {
 	this->janela = NULL;
-	this->fullscreen = false;
+
 	this->td = 0.f;
+
+	this->gridSize = 66.f;
+}
+
+void Jogo::iniGraphicsSettings()
+{
+	this->gfxSettings.loadFromFile("Config/graphics.ini");
+
+
 }
 
 void Jogo::iniJanela()
 {
 	//Cria janela a partir da file window.ini
-	std::ifstream config("Config/window.ini");
-	this->videoModes = sf::VideoMode::getFullscreenModes();
 
-	//Infos tiradas da window_config.ini
-	std::string title = "None";
-	sf::VideoMode window_bounds = sf::VideoMode::getDesktopMode();
-	bool fullscreen = false;
-	unsigned framerate_limit = 120;
-	bool vertical_sync_enabled = false;
-	unsigned antialiasing_level = 0;
 
-	//Tira as informações da file	
-	if (config.is_open())
-	{
-		std::getline(config, title);
-		config >> window_bounds.width >> window_bounds.height;
-		config >> fullscreen;
-		config >> framerate_limit;
-		config >> vertical_sync_enabled;
-		config >> antialiasing_level;
-	}
-	config.close();
-
-	//Inicializa a janela
-	this->fullscreen = fullscreen;
-	this->windowSettings.antialiasingLevel = antialiasing_level;
-
-	if(this->fullscreen)
-		this->janela = new sf::RenderWindow(window_bounds, title, sf::Style::Fullscreen, windowSettings);
+	if(this->gfxSettings.fullscreen)
+		this->janela = new sf::RenderWindow(
+			this->gfxSettings.resolution, 
+			this->gfxSettings.title, 
+			sf::Style::Fullscreen,
+			this->gfxSettings.contextSettings);
 	else
-		this->janela = new sf::RenderWindow(window_bounds, title, sf::Style::Titlebar | sf::Style::Close, windowSettings);
-	this->janela->setFramerateLimit(framerate_limit);
-	this->janela->setVerticalSyncEnabled(vertical_sync_enabled);
+		this->janela = new sf::RenderWindow(
+			this->gfxSettings.resolution,
+			this->gfxSettings.title,
+			sf::Style::Titlebar | sf::Style::Close,
+			this->gfxSettings.contextSettings);
+
+	this->janela->setFramerateLimit(this->gfxSettings.frameRateLimit);
+	this->janela->setVerticalSyncEnabled(this->gfxSettings.verticalSync);
 }
 
 void Jogo::iniTeclas()
@@ -81,17 +74,29 @@ void Jogo::iniTeclas()
 		}
 }
 
+void Jogo::iniDataEstado()
+{
+	this->data_estado.janela = this->janela;
+	this->data_estado.gfxSettings = &this->gfxSettings;
+	this->data_estado.teclasDisponiveis = &this->teclasDisponiveis;
+	this->data_estado.estados = &this->estados;
+	this->data_estado.gridSize = this->gridSize;
+}
+
 void Jogo::iniEstados()
 {
 	//Inicia a pilha de estados empilhando o primeiro estado (menu?)
-	this->estados.push(new EstadoMenuPrincipal(&this->teclasDisponiveis, this->janela, &this->estados));//, &ui_manager)); //, false
+	this->estados.push(new EstadoMenuPrincipal(&this->data_estado));//, &ui_manager)); //, false
 }
 
 /*Construtora e Destrutora*/
 Jogo::Jogo()
 {
+	this->iniVariaveis();
+	this->iniGraphicsSettings();
 	this->iniJanela();
 	this->iniTeclas();
+	this->iniDataEstado();
 	this->iniEstados();
 }
 
