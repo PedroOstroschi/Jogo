@@ -16,7 +16,7 @@ void Jogo::iniVariaveis()
 
 	this->td = 0.f;
 
-	this->gridSize = 66.f;
+	this->gridSize = 64.f;
 }
 
 void Jogo::iniGraphicsSettings()
@@ -117,8 +117,8 @@ void Jogo::atualizaTd()
 	/*TD = FPS = FRAMERATE*/
 	//atualiza a variavel td com tempo que demora para atualizar e renderizar um quadro
 	this->td = this->tdRelogio.restart().asSeconds();
-	system("cls");
-	std::cout << this->td << "\n";
+	//system("cls");
+	//std::cout << this->td << "\n";
 }
 
 void Jogo::atualizaEventosSFML()

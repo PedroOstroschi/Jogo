@@ -57,7 +57,7 @@ void EstadoFase::iniJogadores()
 
 void EstadoFase::iniTileMap()
 {
-	this->tileMap = new TileMap(this->dataEstado->gridSize, 10, 10);
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 30, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
 }
 
 /*Construtora e Destrutora*/

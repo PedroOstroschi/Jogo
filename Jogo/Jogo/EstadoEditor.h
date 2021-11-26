@@ -6,14 +6,10 @@
 #include "MenuPause.h"
 #include "TileMap.h"
 
-//ajuda o pc/compilador/c++?
 class State;
 class GUI;
 class MenuPause;
 class TileMap;
-
-////////////////////////////////
-
 
 class EstadoEditor :
     public Estado
@@ -25,11 +21,21 @@ private:
 
 	TileMap* tileMap;
 
+	sf::IntRect textureRect;
 	sf::RectangleShape selectorRect;
+	sf::Text cursorText;
+
+	sf::RectangleShape sidebar;
+
+	gui::TextureSelector* textureSelector;
+
+	bool colisao;
+	short tipo;
 
 	/*Funçõees inicializadoras*/
 	void initVariaveis();
 	void initPlanoDeFundo();
+	void iniTextos();
 	void iniTeclas();
 	void initPauseMenu();
 	void iniBotoes();
@@ -48,7 +54,7 @@ public:
 	void atualizaTeclas(const float td);
 	void atualizaEditorInput(const float& td);
 	void atualizaBotoes();
-	void updateGui();
+	void updateGui(const float& td);
 	void updatePauseMenuBotoes();
 	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderizaBotoes(sf::RenderTarget& alvo);

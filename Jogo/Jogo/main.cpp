@@ -7,5 +7,6 @@ int main()
 
 	jogo.executa() ;
 
+	//system("pause");
 	return 0;
 }
