@@ -46,6 +46,11 @@ TileMap::TileMap(float gridSize, unsigned width, unsigned height, std::string te
 
 	if(!this->tileSheet.loadFromFile(texture_file))
 		std::cout << "ERRO::TILEMAP::NAO CARREGOU TEXTURA::FILENAME::" << texture_file << "\n";
+
+	this->collisionBox.setSize(sf::Vector2f(gridSize, gridSize));
+	this->collisionBox.setFillColor(sf::Color(255, 0, 0, 30));
+	this->collisionBox.setOutlineColor(sf::Color::Red);
+	this->collisionBox.setOutlineThickness(1.f);
 }
 
 TileMap::~TileMap()
@@ -60,7 +65,7 @@ const sf::Texture* TileMap::getTileSheet() const
 }
 
 //functions
-void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect)
+void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect, const bool colisao, const short tipo)
 {
 	/*pega o x, y e z da posicao do mouse no grid e adiciona uma tile naquele bloco se a matriz permitir*/
 
@@ -71,7 +76,7 @@ void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, cons
 		if (this->map[x][y][z] == NULL)
 		{
 			/*permitido adicionar tile*/
-			this->map[x][y][z] = new Tile(x, y, this->gridSizeF, this->tileSheet, texture_rect);
+			this->map[x][y][z] = new Tile(x, y, this->gridSizeF, this->tileSheet, texture_rect, colisao, tipo);
 			std::cout << "DEBUG: colocou tile" << "\n";
 		}
 	}
@@ -226,12 +231,17 @@ void TileMap::loadFromFile(const std::string file_name)
 	in_file.close();
 }
 
+void TileMap::updateCollision(Entidade* entity)
+{
+
+}
+
 void TileMap::update()
 {
 
 }
 
-void TileMap::render(sf::RenderTarget & alvo)
+void TileMap::render(sf::RenderTarget& alvo, Entidade* entity = NULL)
 {
 	for (auto& x : this->map)
 	{
@@ -239,8 +249,15 @@ void TileMap::render(sf::RenderTarget & alvo)
 		{
 			for (auto* z : y)
 			{
-				if (z != NULL)
+				if (z != NULL) 
+				{
 					z->render(alvo);
+					if (z->getCollision())
+					{
+						this->collisionBox.setPosition(z->getPosition());
+						alvo.draw(this->collisionBox);
+					}
+				}
 			}
 		}
 	}

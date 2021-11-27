@@ -47,9 +47,6 @@ void EntidadeDinamica::move(const float dir_x, const float dir_y, const float& t
 
 const sf::Vector2f& EntidadeDinamica::getPosition() const
 {
-	if (this->componenteHitbox)
-		return this->componenteHitbox->getPosition();
-
 	return this->sprite.getPosition();
 }
 

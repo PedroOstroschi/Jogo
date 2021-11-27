@@ -5,10 +5,21 @@
 #include "MenuPause.h"
 #include "TileMap.h"
 
+class ManuPause;
+class Jogador;
+class TileMap;
+class sf::View;
+class sf::Font;
+class sf::RenderTexture;
+
 class EstadoFase :
 	public Estado
 {
 private:
+
+	sf::View view;
+	sf::RenderTexture renderTexture;
+	sf::Sprite renderSprite;
 
 	MenuPause* menupause;
 
@@ -19,6 +30,8 @@ private:
 	TileMap* tileMap;
 
 	/*Funçõees inicializadoras*/
+	void iniPosRender();
+	void iniView();
 	void iniElementos();
 	void iniTeclas();
 	void iniFontes();
@@ -38,6 +51,7 @@ public:
 	/*set e get*/
 
 	/*Funções*/
+	void updateView(const float& td);
 	void fechaEstado();
 	void pausaEstado();
 	void despausaEstado();

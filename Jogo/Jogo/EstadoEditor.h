@@ -16,24 +16,29 @@ class EstadoEditor :
 {
 private:
 	/*Variaveis*/
-	std::map<std::string, gui::Botao*> botoes;
+	sf::View view;
+
+	sf::Text cursorText;
 	MenuPause* menupause;
+
+	std::map<std::string, gui::Botao*> botoes;
 
 	TileMap* tileMap;
 
-	sf::IntRect textureRect;
-	sf::RectangleShape selectorRect;
-	sf::Text cursorText;
-
 	sf::RectangleShape sidebar;
+
+	sf::RectangleShape selectorRect;
 
 	gui::TextureSelector* textureSelector;
 
+	sf::IntRect textureRect;
+	float cameraSpeed;
 	bool colisao;
 	short tipo;
 
 	/*Funçõees inicializadoras*/
 	void initVariaveis();
+	void iniView();
 	void initPlanoDeFundo();
 	void iniTextos();
 	void iniTeclas();

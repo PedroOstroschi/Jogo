@@ -21,7 +21,7 @@ Jogador::Jogador(float x, float y, sf::Texture& texture_sheet)
 	this->setPosition(x, y);
 
 	this->createHitboxComponent(this->sprite, 165.f, 140.f, 81.f, 120.f);
-	this->createMovementComponent(500.f, 40.f, 250.f, 100.f);
+	this->createMovementComponent(500.f, 20.f, 250.f, 100.f);
 	this->createAnimationComponent(texture_sheet);
 
 	//"key",					animation_timer, start_frame_x, start_frame_y, frames_x, frames_y, width, height)

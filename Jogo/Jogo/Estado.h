@@ -84,7 +84,7 @@ public:
 	virtual void atualiza(const float& td) = 0;
 	virtual void renderiza(sf::RenderTarget* target = NULL) = 0;
 	virtual void atualizaTecla(const float& td);
-	virtual void atualizaPosicaoMouse();
+	virtual void atualizaPosicaoMouse(sf::View* view = NULL);
 	virtual void updateKeyTime(const float& td);
 	virtual void salva() = 0;
 };

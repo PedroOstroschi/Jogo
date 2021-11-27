@@ -14,12 +14,13 @@ Estado::Estado(DataEstado* data_estado)
 	this->pontuacao = 0;
 	this->estados = data_estado->estados;
 	this->keytime = 0.f;
-	this->keytimemax = 10.f;
+	this->keytimemax = 30.f;
 	this->gridSize = data_estado->gridSize;
 }
 
 Estado:: ~Estado()
 {
+
 }
 
 /*Set's e Get's*/
@@ -75,16 +76,22 @@ void Estado::atualizaTecla(const float& td)
 
 }
 
-void Estado::atualizaPosicaoMouse()
+void Estado::atualizaPosicaoMouse(sf::View* view)
 {
 	this->mousePosScreen = sf::Mouse::getPosition();
 	this->mousePosWindow = sf::Mouse::getPosition(*this->janela);
+
+	if(view)
+		this->janela->setView(*view);
+
 	this->mousePosView = this->janela->mapPixelToCoords(sf::Mouse::getPosition(*this->janela));
 	this->mousePosGrid = sf::Vector2u
 	(
 		static_cast<unsigned>(this->mousePosView.x) / static_cast<unsigned>(this->gridSize),
 		static_cast<unsigned>(this->mousePosView.y) / static_cast<unsigned>(this->gridSize)
 	);
+
+	this->janela->setView(this->janela->getDefaultView());
 }
 
 void Estado::updateKeyTime(const float& td)

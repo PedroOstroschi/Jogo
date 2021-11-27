@@ -19,7 +19,7 @@ Tile::Tile(unsigned grid_x, unsigned grid_y, float gridSizeF, const sf::Texture&
 	this->shape.setTextureRect(texture_rect);
 
 	this->colisao = colisao;
-	this->tipo = 0;
+	this->tipo = tipo;
 }
 
 Tile::~Tile()
@@ -27,6 +27,16 @@ Tile::~Tile()
 
 }
 
+
+const bool& Tile::getCollision() const
+{
+	return this->colisao;
+}
+
+const sf::Vector2f& Tile::getPosition() const
+{
+	return this->shape.getPosition();
+}
 
 //funcitons
 const std::string Tile::getAsString() const

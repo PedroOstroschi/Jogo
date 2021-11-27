@@ -19,6 +19,11 @@ Entidade::~Entidade()
 	delete this->componenteHitbox;
 }
 
+const sf::Vector2f& Entidade::getPosition() const
+{
+	return this->sprite.getPosition();
+}
+
 /*Funções de Componente*/
 void Entidade::createHitboxComponent(sf::Sprite& sprite,
 	const float offset_x, const float offset_y,
@@ -38,7 +43,7 @@ void Entidade::setPosition(const float x, const float y)
 	this->sprite.setPosition(x, y);
 }
 
-void Entidade::renderiza(sf::RenderWindow& alvo)
+void Entidade::renderiza(sf::RenderTarget& alvo)
 {
 	alvo.draw(this->sprite);
 

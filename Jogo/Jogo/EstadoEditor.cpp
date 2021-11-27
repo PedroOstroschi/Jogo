@@ -7,6 +7,22 @@ void EstadoEditor::initVariaveis()
 	this->textureRect = sf::IntRect(0, 0, static_cast<int>(this->dataEstado->gridSize), static_cast<int>(this->dataEstado->gridSize));
 	this->colisao = false;
 	this->tipo = TileTypes::DEFAULT;
+	this->cameraSpeed = 100.f;
+}
+
+void EstadoEditor::iniView()
+{
+	this->view.setSize(
+		sf::Vector2f(
+			this->dataEstado->gfxSettings->resolution.width, 
+			this->dataEstado->gfxSettings->resolution.height
+		)
+	);
+	
+	this->view.setCenter(
+		this->dataEstado->gfxSettings->resolution.width / 2.f, 
+		this->dataEstado->gfxSettings->resolution.height / 2.f
+	);
 }
 
 void EstadoEditor::initPlanoDeFundo()
@@ -77,11 +93,14 @@ void EstadoEditor::iniGui()
 		this->dataEstado->gridSize, this->tileMap->getTileSheet(),
 		this->font, "X"
 	);
+
+
+
 }
 
 void EstadoEditor::iniTileMap()
 {
-	this->tileMap = new TileMap(this->dataEstado->gridSize, 30, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 100, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
 }
 
 /*Construtora e Destrutora*/
@@ -90,6 +109,7 @@ EstadoEditor::EstadoEditor(DataEstado* data_estado)
 {
 	//this->ui_manager = ui_manager;
 	this->initVariaveis();
+	this->iniView();
 	this->initPlanoDeFundo();
 	this->iniFontes();
 	this->iniTextos();
@@ -130,6 +150,17 @@ void EstadoEditor::atualizaTeclas(const float td)
 
 void EstadoEditor::atualizaEditorInput(const float& td)
 {
+	//move view
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_RIGHT"))))
+	{
+		this->view.move(this->cameraSpeed * td, 0.f);
+	}
+	//move view
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_LEFT"))))
+	{
+		this->view.move(-this->cameraSpeed * td, 0.f);
+	}
+
 	//add tile
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getKeytime())
 	{
@@ -137,7 +168,7 @@ void EstadoEditor::atualizaEditorInput(const float& td)
 		{
 			if (!this->textureSelector->getActive())
 			{
-				this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect);
+				this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0, this->textureRect, this->colisao, this->tipo);
 			}
 			else
 			{
@@ -154,6 +185,26 @@ void EstadoEditor::atualizaEditorInput(const float& td)
 				this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
 		}
 	}
+
+	//TOGGLE COLISAO
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("TOGGLE_COLIDIR"))) && this->getKeytime())
+	{
+		if (this->colisao)
+			this->colisao = false;
+		else
+			this->colisao = true;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("TIPO_INCREMENTA"))) && this->getKeytime())
+	{
+		//definir limite para o tipo
+		++this->tipo;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("TIPO_DECREMENTA"))) && this->getKeytime())
+	{
+		if (this->tipo > 0)
+			--this->tipo;
+	}
+	
 }
 
 void EstadoEditor::atualizaBotoes()
@@ -162,7 +213,7 @@ void EstadoEditor::atualizaBotoes()
 	//main loop
 	for (auto& it : this->botoes)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 
 }
@@ -175,7 +226,6 @@ void EstadoEditor::updateGui(const float& td)
 	{
 		this->selectorRect.setTextureRect(this->textureRect);
 		this->selectorRect.setPosition(this->mousePosGrid.x * this->dataEstado->gridSize, this->mousePosGrid.y * this->dataEstado->gridSize);
-
 	}
 
 	this->cursorText.setPosition(this->mousePosView.x - 30.f, this->mousePosView.y - 130.f);
@@ -183,7 +233,11 @@ void EstadoEditor::updateGui(const float& td)
 
 	ss << this->mousePosView.x << " " << this->mousePosView.y << 
 		"\n" << this->mousePosGrid.x << " " << this->mousePosGrid.y <<
-		"\n" << this->textureRect.left / 64 << " " << this->textureRect.top / 64;
+		"\n" << this->textureRect.left / 64 << " " << this->textureRect.top / 64 <<
+		"\n" << "colisao: " << this->colisao <<
+		"\n" << "Type: " << this->tipo;
+	
+	
 	this->cursorText.setString(ss.str());
 }
 
@@ -201,7 +255,7 @@ void EstadoEditor::updatePauseMenuBotoes()
 
 void EstadoEditor::atualiza(const float& td)
 {
-	this->atualizaPosicaoMouse();
+	this->atualizaPosicaoMouse(&this->view);
 	this->updateKeyTime(td);
 	this->atualizaTeclas(td);
 
@@ -213,7 +267,7 @@ void EstadoEditor::atualiza(const float& td)
 	}
 	else //pausado
 	{
-		this->menupause->atualiza(this->mousePosView);
+		this->menupause->atualiza(this->mousePosWindow);
 		this->updatePauseMenuBotoes();
 	}
 }
@@ -228,14 +282,21 @@ void EstadoEditor::renderizaBotoes(sf::RenderTarget& alvo)
 
 void EstadoEditor::renderizaGui(sf::RenderTarget& alvo)
 {
-	if(!this->textureSelector->getActive())
+	if (!this->textureSelector->getActive())
+	{
+
+		alvo.setView(this->view);
 		alvo.draw(this->selectorRect);
+	}
 
+	alvo.setView(this->janela->getDefaultView());
 	this->textureSelector->render(alvo);
+	alvo.draw(this->sidebar);
 
+	alvo.setView(this->view);
 	alvo.draw(this->cursorText);
 
-	alvo.draw(this->sidebar);
+;
 }
 
 void EstadoEditor::renderiza(sf::RenderTarget* alvo)
@@ -244,13 +305,17 @@ void EstadoEditor::renderiza(sf::RenderTarget* alvo)
 	if (!alvo)
 		alvo = this->janela;
 
+	alvo->setView(this->view);
 	this->tileMap->render(*alvo);
 
+	alvo->setView(this->janela->getDefaultView());
 	this->renderizaBotoes(*alvo);
+
 	this->renderizaGui(*alvo);
 
 	if (this->pausado)
 	{
+		alvo->setView(this->janela->getDefaultView());
 		this->menupause->renderiza(*alvo);
 	}
 

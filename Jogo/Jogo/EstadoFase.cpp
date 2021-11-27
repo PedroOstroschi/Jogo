@@ -1,7 +1,42 @@
 #include "stdafx.h"
 #include "EstadoFase.h"
 
+void EstadoFase::iniPosRender()
+{
+	this->renderTexture.create(
+		this->dataEstado->gfxSettings->resolution.width,
+		this->dataEstado->gfxSettings->resolution.height
+	);
+
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	this->renderSprite.setTextureRect(
+		sf::IntRect(
+			0,
+			0,
+			this->dataEstado->gfxSettings->resolution.width,
+			this->dataEstado->gfxSettings->resolution.height
+		)
+	);
+}
+
 /*Inicializadores*/
+void EstadoFase::iniView()
+{
+	this->view.setSize(
+		sf::Vector2f(
+			this->dataEstado->gfxSettings->resolution.width,
+			this->dataEstado->gfxSettings->resolution.height
+		)
+	);
+	this->view.setCenter(
+		sf::Vector2f(
+			this->dataEstado->gfxSettings->resolution.width / 2.f,
+			this->dataEstado->gfxSettings->resolution.height / 2.f
+		)
+	);
+
+}
+
 void EstadoFase::iniElementos()
 {
 
@@ -57,14 +92,16 @@ void EstadoFase::iniJogadores()
 
 void EstadoFase::iniTileMap()
 {
-	this->tileMap = new TileMap(this->dataEstado->gridSize, 30, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 100, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap->loadFromFile("text_teste");
 }
 
 /*Construtora e Destrutora*/
 EstadoFase::EstadoFase(DataEstado* data_estado)
-	:Estado(data_estado)
+	: Estado(data_estado)
 {
-
+	this->iniPosRender();
+	this->iniView();
 	this->iniTeclas();
 	this->iniFontes();
 	this->iniTexturas();
@@ -80,6 +117,11 @@ EstadoFase::~EstadoFase()
 	delete this->jogador;
 	delete this->menupause;
 	delete this->tileMap;
+}
+
+void EstadoFase::updateView(const float& td)
+{
+	this->view.setCenter(this->jogador->getPosition());
 }
 
 /*Funções*/
@@ -131,19 +173,21 @@ void EstadoFase::updatePauseMenuButtons()
 
 void EstadoFase::atualiza(const float& td)
 {
-	this->atualizaPosicaoMouse();
+	this->atualizaPosicaoMouse(&this->view);
 	this->updateKeyTime(td);
 	this->updateInput(td);
 
 	if (!this->pausado)	//atualiza o jogo despausado
 	{
+		this->updateView(td);
+
 		this->updatePlayerInput(td);
 
 		this->jogador->atualiza(td);
 	}
 	else	//atualiza o menu de pausa
 	{
-		this->menupause->atualiza(this->mousePosView);
+		this->menupause->atualiza(this->mousePosWindow);
 
 		this->updatePauseMenuButtons();
 	}
@@ -155,14 +199,23 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 	if (alvo == NULL)
 		alvo = this->janela;
 
-	//this->map.render(*alvo);
+	this->renderTexture.clear();
 
-	this->jogador->renderiza(*janela);
+	this->renderTexture.setView(this->view);
+	this->tileMap->render(this->renderTexture);
+
+	this->jogador->renderiza(this->renderTexture);
 
 	if (this->pausado)	//render menu pause
 	{
-		this->menupause->renderiza(*alvo);
+		this->renderTexture.setView(this->renderTexture.getDefaultView());
+		this->menupause->renderiza(this->renderTexture);
 	}
+
+	//final render
+	this->renderTexture.display();
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	alvo->draw(this->renderSprite);
 }
 
 /*criacao da fase*/

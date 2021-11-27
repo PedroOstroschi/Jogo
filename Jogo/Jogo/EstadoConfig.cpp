@@ -131,7 +131,7 @@ void EstadoConfig::atualizaGui(const float td)
 	//BOTOES
 	for (auto& it : this->botoes)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 	//quit the game
 	if (this->botoes["BACK"]->isPressed())
@@ -149,7 +149,7 @@ void EstadoConfig::atualizaGui(const float td)
 	//DDL
 	for (auto& it : this->dropDownListas)
 	{
-		it.second->update(this->mousePosView, td);
+		it.second->update(this->mousePosWindow, td);
 	}
 	//ddl funcionality
 }

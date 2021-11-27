@@ -19,6 +19,8 @@ public:
 	Entidade();
 	virtual ~Entidade();
 
+	virtual const sf::Vector2f& getPosition() const;
+
 	/*Funções de Componente*/
 	void createHitboxComponent(sf::Sprite& sprite, 
 		const float offset_x, const float offset_y, 
@@ -27,5 +29,5 @@ public:
 	/*Funções*/
 	void setTexture(sf::Texture& texture);
 	virtual void setPosition(const float x, const float y);
-	virtual void renderiza(sf::RenderWindow& alvo);
+	virtual void renderiza(sf::RenderTarget& alvo);
 };

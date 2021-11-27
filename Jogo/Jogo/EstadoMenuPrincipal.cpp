@@ -144,7 +144,7 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//main loop
 	for (auto& it : this->botoes)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 
 	//editor

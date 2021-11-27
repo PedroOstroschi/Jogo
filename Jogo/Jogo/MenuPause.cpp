@@ -97,14 +97,14 @@ void MenuPause::addButton(const std::string key, float y, const std::string text
 	);
 }
 
-void MenuPause::atualiza(const sf::Vector2f& mousePos)
+void MenuPause::atualiza(const sf::Vector2i& mousePosWindow)
 {
 	atualizaBotoes();
 	atualizaPosicaoMouse();
 
 	for (auto& i : this->botoes)
 	{
-		i.second->update(mousePos);
+		i.second->update(mousePosWindow);
 	}
 
 }
@@ -128,7 +128,7 @@ void MenuPause::atualizaBotoes()
 	//main loop
 	for (auto& it : this->botoes)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 }
 
