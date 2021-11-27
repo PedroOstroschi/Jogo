@@ -241,7 +241,7 @@ void TileMap::update()
 
 }
 
-void TileMap::render(sf::RenderTarget& alvo, Entidade* entity = NULL)
+void TileMap::render(sf::RenderTarget& alvo, Entidade* entity)
 {
 	for (auto& x : this->map)
 	{

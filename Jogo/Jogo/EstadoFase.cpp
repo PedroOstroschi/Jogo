@@ -121,7 +121,7 @@ EstadoFase::~EstadoFase()
 
 void EstadoFase::updateView(const float& td)
 {
-	this->view.setCenter(this->jogador->getPosition());
+	this->view.setCenter(std::floor(this->jogador->getPosition().x), std::floor(this->jogador->getPosition().y));
 }
 
 /*Funções*/

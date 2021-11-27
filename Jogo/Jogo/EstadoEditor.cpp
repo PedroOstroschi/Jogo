@@ -153,12 +153,12 @@ void EstadoEditor::atualizaEditorInput(const float& td)
 	//move view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_RIGHT"))))
 	{
-		this->view.move(this->cameraSpeed * td, 0.f);
+		this->view.move(std::floor(this->cameraSpeed * td), 0.f);
 	}
 	//move view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_LEFT"))))
 	{
-		this->view.move(-this->cameraSpeed * td, 0.f);
+		this->view.move(-std::floor(this->cameraSpeed * td), 0.f);
 	}
 
 	//add tile
