@@ -18,6 +18,8 @@ public:
     /*Funcoes*/
     void updateAttack();
     void updateAnimation(const float& dt);
-    virtual void atualiza(const float& dt);
+    void atualiza(const float& dt);
+
+    void render(sf::RenderTarget& target);
 };
 

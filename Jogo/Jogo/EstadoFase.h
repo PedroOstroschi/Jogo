@@ -57,6 +57,7 @@ public:
 	void despausaEstado();
 	void updatePlayerInput(const float td);
 	void updatePauseMenuButtons();
+	void updateTileMap(const float& td);
 	void atualiza(const float& td) override; //chama atualizaTecla
 	void renderiza(sf::RenderTarget* alvo = NULL);
 	void gerarFase();

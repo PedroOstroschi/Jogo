@@ -20,6 +20,7 @@ public:
 	virtual ~Entidade();
 
 	virtual const sf::Vector2f& getPosition() const;
+	virtual const sf::FloatRect getGlobalBounds() const;
 
 	/*Funções de Componente*/
 	void createHitboxComponent(sf::Sprite& sprite, 
@@ -27,7 +28,9 @@ public:
 		float width, float height);
 
 	/*Funções*/
-	void setTexture(sf::Texture& texture);
 	virtual void setPosition(const float x, const float y);
+
+	void setTexture(sf::Texture& texture);
+
 	virtual void renderiza(sf::RenderTarget& alvo);
 };

@@ -24,20 +24,7 @@ ComponenteHitbox::~ComponenteHitbox()
 
 }
 
-bool ComponenteHitbox::checkIntersect(const sf::FloatRect& frect)
-{
-		return this->hitbox.getGlobalBounds().intersects(frect);
-}
 
-void ComponenteHitbox::update()
-{
-	this->hitbox.setPosition(this->sprite.getPosition().x + this->offsetX, this->sprite.getPosition().y + this->offsetY);
-}
-
-void ComponenteHitbox::render(sf::RenderTarget& target)
-{
-	target.draw(this->hitbox);
-}
 
 //Accessors
 const sf::Vector2f& ComponenteHitbox::getPosition() const
@@ -45,6 +32,21 @@ const sf::Vector2f& ComponenteHitbox::getPosition() const
 	return this->hitbox.getPosition();
 }
 
+//modifiers
+void ComponenteHitbox::setPosition(const sf::Vector2f& position)
+{
+	this->hitbox.setPosition(position);
+	this->sprite.setPosition(position.x - this->offsetX, position.y - this->offsetY);
+
+}
+
+void ComponenteHitbox::setPosition(const float x, const float y)
+{
+	this->hitbox.setPosition(x, y);
+	this->sprite.setPosition(x - this->offsetX, y - this->offsetY);
+}
+
+//funcoes
 const sf::FloatRect ComponenteHitbox::getGlobalBounds() const
 {
 	return this->hitbox.getGlobalBounds();
@@ -56,4 +58,19 @@ const sf::FloatRect& ComponenteHitbox::getNextPosition(const sf::Vector2f& veloc
 	//this->nextPosition.top = this->hitbox.getPosition().y + velocity.y;
 
 	return this->nextPosition;
+}
+
+bool ComponenteHitbox::intersects(const sf::FloatRect& frect)
+{
+	return this->hitbox.getGlobalBounds().intersects(frect);
+}
+
+void ComponenteHitbox::update()
+{
+	this->hitbox.setPosition(this->sprite.getPosition().x + this->offsetX, this->sprite.getPosition().y + this->offsetY);
+}
+
+void ComponenteHitbox::render(sf::RenderTarget& target)
+{
+	target.draw(this->hitbox);
 }

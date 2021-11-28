@@ -108,3 +108,10 @@ void Jogador::atualiza(const float& dt)
 	
 	this->componenteHitbox->update();
 }
+
+void Jogador::render(sf::RenderTarget& alvo)
+{
+	//alvo.draw(this->sprite);
+
+	//this->componenteHitbox->render(alvo);
+}

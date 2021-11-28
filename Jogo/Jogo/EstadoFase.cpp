@@ -92,7 +92,7 @@ void EstadoFase::iniJogadores()
 
 void EstadoFase::iniTileMap()
 {
-	this->tileMap = new TileMap(this->dataEstado->gridSize, 100, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 10, 10, "Resources/Images/Sprites/Map/mainlev_build.png");
 	this->tileMap->loadFromFile("text_teste");
 }
 
@@ -122,6 +122,8 @@ EstadoFase::~EstadoFase()
 void EstadoFase::updateView(const float& td)
 {
 	this->view.setCenter(std::floor(this->jogador->getPosition().x), std::floor(this->jogador->getPosition().y));
+//	this->view.setCenter(std::floor(this->jogador->getPosition().x), this->dataEstado->gfxSettings->resolution.height / 2);
+
 }
 
 /*Funções*/
@@ -171,6 +173,13 @@ void EstadoFase::updatePauseMenuButtons()
 
 }
 
+void EstadoFase::updateTileMap(const float& td)
+{
+	this->tileMap->update();
+	this->tileMap->updateCollision(this->jogador);
+
+}
+
 void EstadoFase::atualiza(const float& td)
 {
 	this->atualizaPosicaoMouse(&this->view);
@@ -184,6 +193,8 @@ void EstadoFase::atualiza(const float& td)
 		this->updatePlayerInput(td);
 
 		this->jogador->atualiza(td);
+
+		this->updateTileMap(td);
 	}
 	else	//atualiza o menu de pausa
 	{

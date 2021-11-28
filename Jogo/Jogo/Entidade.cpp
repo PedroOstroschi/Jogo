@@ -19,10 +19,7 @@ Entidade::~Entidade()
 	delete this->componenteHitbox;
 }
 
-const sf::Vector2f& Entidade::getPosition() const
-{
-	return this->sprite.getPosition();
-}
+
 
 /*Funções de Componente*/
 void Entidade::createHitboxComponent(sf::Sprite& sprite,
@@ -33,14 +30,33 @@ void Entidade::createHitboxComponent(sf::Sprite& sprite,
 }
 
 /*Funções*/
-void Entidade::setTexture(sf::Texture& texture)
+const sf::Vector2f& Entidade::getPosition() const
 {
-	this->sprite.setTexture(texture);
+	if (this->componenteHitbox)
+		return this->componenteHitbox->getPosition();
+
+	return this->sprite.getPosition();
+}
+
+const sf::FloatRect Entidade::getGlobalBounds() const
+{
+	if (this->componenteHitbox)
+		return this->componenteHitbox->getGlobalBounds();
+
+	return this->sprite.getGlobalBounds();
 }
 
 void Entidade::setPosition(const float x, const float y)
 {
-	this->sprite.setPosition(x, y);
+	if (this->componenteHitbox)
+		this->componenteHitbox->setPosition(x, y);
+	else
+		this->sprite.setPosition(x, y);
+}
+
+void Entidade::setTexture(sf::Texture& texture)
+{
+	this->sprite.setTexture(texture);
 }
 
 void Entidade::renderiza(sf::RenderTarget& alvo)

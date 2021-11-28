@@ -100,7 +100,7 @@ void EstadoEditor::iniGui()
 
 void EstadoEditor::iniTileMap()
 {
-	this->tileMap = new TileMap(this->dataEstado->gridSize, 100, 17, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 10, 10, "Resources/Images/Sprites/Map/mainlev_build.png");
 }
 
 /*Construtora e Destrutora*/
@@ -153,12 +153,12 @@ void EstadoEditor::atualizaEditorInput(const float& td)
 	//move view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_RIGHT"))))
 	{
-		this->view.move(std::floor(this->cameraSpeed * td), 0.f);
+		this->view.move(this->cameraSpeed * td, 0.f);
 	}
 	//move view
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_CAMERA_LEFT"))))
 	{
-		this->view.move(-std::floor(this->cameraSpeed * td), 0.f);
+		this->view.move(-this->cameraSpeed * td, 0.f);
 	}
 
 	//add tile

@@ -14,12 +14,12 @@ void EstadoMenuPrincipal::initPlanoDeFundo()
 	this->planoDeFundo.setSize(
 		sf::Vector2f
 		(
-			static_cast<float>(this->janela->getSize().x), 
+			static_cast<float>(this->janela->getSize().x),
 			static_cast<float>(this->janela->getSize().y)
 		)
 	);
 
-	if (!this->texturaPlanoDeFundo.loadFromFile("Resources/Images/Backgrounds/background_grafico.png"))
+	if (!this->texturaPlanoDeFundo.loadFromFile("Resources/Images/Backgrounds/background.png"))
 	{
 		throw "ERRO::ESTADO_MENU_PRINCIPAL::FALHOU_CARREGAR_TEXTURA_BACKGROUND";
 	}

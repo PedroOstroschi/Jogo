@@ -134,7 +134,7 @@ void Jogo::atualiza()
 {
 	this->atualizaEventosSFML();
 
-	if (!this->estados.empty())
+	if (!this->estados.empty() && this->janela->hasFocus())
 	{
 		this->estados.top()->atualiza(td);
 

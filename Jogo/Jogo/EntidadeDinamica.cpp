@@ -31,30 +31,8 @@ void EntidadeDinamica::createAnimationComponent(sf::Texture& texture_sheet)
 	this->componenteAnimacao = new ComponenteAnimacao(this->sprite, texture_sheet);
 }
 
-/*Funções*/
-void EntidadeDinamica::atualiza(const float td)
-{
 
-}
-
-void EntidadeDinamica::move(const float dir_x, const float dir_y, const float& td)
-{
-	if (this->componenteMovimento)
-	{
-		this->componenteMovimento->move(dir_x, dir_y, td);	//seta velocidade
-	}
-}
-
-const sf::Vector2f& EntidadeDinamica::getPosition() const
-{
-	return this->sprite.getPosition();
-}
-
-const sf::Vector2f& EntidadeDinamica::getSpritePosition() const
-{
-	return this->sprite.getPosition();
-}
-
+//
 const sf::Vector2f EntidadeDinamica::getCenter() const
 {
 	if (this->componenteHitbox)
@@ -83,4 +61,22 @@ const sf::Vector2f EntidadeDinamica::getSpriteCenter() const
 			this->sprite.getGlobalBounds().width / 2.f,
 			this->sprite.getGlobalBounds().height / 2.f
 		);;
+}
+
+const sf::Vector2f& EntidadeDinamica::getSpritePosition() const
+{
+	return this->sprite.getPosition();
+}
+
+
+/*Funções*/
+void EntidadeDinamica::move(const float dir_x, const float dir_y, const float& td)
+{
+	if (this->componenteMovimento)
+		this->componenteMovimento->move(dir_x, dir_y, td);	//seta velocidade
+}
+
+void EntidadeDinamica::atualiza(const float & td)
+{
+
 }
