@@ -54,8 +54,8 @@ const sf::FloatRect ComponenteHitbox::getGlobalBounds() const
 
 const sf::FloatRect& ComponenteHitbox::getNextPosition(const sf::Vector2f& velocity)
 {
-	//this->nextPosition.left = this->hitbox.getPosition().x + velocity.x;
-	//this->nextPosition.top = this->hitbox.getPosition().y + velocity.y;
+	this->nextPosition.left = this->hitbox.getPosition().x + velocity.x;
+	this->nextPosition.top = this->hitbox.getPosition().y + velocity.y;
 
 	return this->nextPosition;
 }

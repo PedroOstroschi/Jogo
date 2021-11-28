@@ -83,7 +83,7 @@ void EstadoEditor::iniGui()
 	this->selectorRect.setSize(sf::Vector2f(this->dataEstado->gridSize, this->dataEstado->gridSize));
 	
 	this->selectorRect.setFillColor(sf::Color(255, 255, 255, 150));
-	this->selectorRect.setOutlineThickness(1.f);
+	this->selectorRect.setOutlineThickness(-1.f);
 	this->selectorRect.setOutlineColor(sf::Color::Green);
 
 	this->selectorRect.setTexture(this->tileMap->getTileSheet());

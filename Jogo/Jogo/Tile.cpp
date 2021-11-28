@@ -7,7 +7,7 @@ Tile::Tile()
 	this->tipo = 0;
 }
 
-Tile::Tile(unsigned grid_x, unsigned grid_y, float gridSizeF, const sf::Texture& texture, const sf::IntRect& texture_rect,
+Tile::Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, const sf::IntRect& texture_rect,
 	bool colisao, short tipo)
 {
 	this->shape.setSize(sf::Vector2f(gridSizeF, gridSizeF));
@@ -46,6 +46,16 @@ const std::string Tile::getAsString() const
 	ss << this->shape.getTextureRect().left << " " << this->shape.getTextureRect().top << " " << this->colisao << " " << this->tipo;
 
 	return ss.str();
+}
+
+const sf::FloatRect Tile::getGlobalBounds() const
+{
+	return this->shape.getGlobalBounds();
+}
+
+const bool Tile::intersects(const sf::FloatRect bounds) const
+{
+	return this->shape.getGlobalBounds().intersects(bounds);
 }
 
 void Tile::update()

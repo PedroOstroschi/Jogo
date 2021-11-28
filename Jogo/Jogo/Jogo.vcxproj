@@ -160,7 +160,6 @@
     <ClCompile Include="GraphicsSettings.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ComponenteAnimacao.cpp" />
-    <ClCompile Include="ComponenteAtributos.cpp" />
     <ClCompile Include="ComponenteHitbox.cpp" />
     <ClCompile Include="ComponenteMovimento.cpp" />
     <ClCompile Include="Entidade.cpp" />
@@ -188,7 +187,6 @@
     <ClInclude Include="GraphicsSettings.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="ComponenteAnimacao.h" />
-    <ClInclude Include="ComponenteAtributos.h" />
     <ClInclude Include="ComponenteHitbox.h" />
     <ClInclude Include="ComponenteMovimento.h" />
     <ClInclude Include="Entidade.h" />

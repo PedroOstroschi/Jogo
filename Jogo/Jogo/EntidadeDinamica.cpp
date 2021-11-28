@@ -33,6 +33,9 @@ void EntidadeDinamica::createAnimationComponent(sf::Texture& texture_sheet)
 
 
 //
+
+
+//
 const sf::Vector2f EntidadeDinamica::getCenter() const
 {
 	if (this->componenteHitbox)
@@ -74,6 +77,30 @@ void EntidadeDinamica::move(const float dir_x, const float dir_y, const float& t
 {
 	if (this->componenteMovimento)
 		this->componenteMovimento->move(dir_x, dir_y, td);	//seta velocidade
+}
+
+void EntidadeDinamica::stopVelocity()
+{
+	if (this->componenteMovimento)
+		this->componenteMovimento->stopVelocity();
+}
+
+void EntidadeDinamica::stopVelocityX()
+{
+	if (this->componenteMovimento)
+		this->componenteMovimento->stopVelocityX();
+}
+
+void EntidadeDinamica::stopVelocityY()
+{
+	if (this->componenteMovimento)
+		this->componenteMovimento->stopVelocityY();
+}
+
+const sf::FloatRect& EntidadeDinamica::getNextPositionBounds(const float& td) const
+{
+	if (this->componenteHitbox && this->componenteMovimento)
+		return this->componenteHitbox->getNextPosition(this->componenteMovimento->getVelocity() * td);
 }
 
 void EntidadeDinamica::atualiza(const float & td)

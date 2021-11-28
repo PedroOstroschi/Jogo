@@ -3,7 +3,6 @@
 #include "ComponenteMovimento.h"
 #include "ComponenteAnimacao.h"
 #include "ComponenteHitbox.h"
-#include "ComponenteAtributos.h"
 
 class EntidadeDinamica :
 	public Entidade
@@ -13,7 +12,6 @@ private:
 protected:
 	ComponenteMovimento* componenteMovimento;
 	ComponenteAnimacao* componenteAnimacao;
-	ComponenteAtributos* componenteAtributos;
 
 public:
 	void initVariaveis();
@@ -33,6 +31,11 @@ public:
 
 	/*Funções*/
 	virtual void move(const float dir_x, const float dir_y, const float& td);
+	virtual void stopVelocity();
+	virtual void stopVelocityX();
+	virtual void stopVelocityY();
+
+	virtual const sf::FloatRect& getNextPositionBounds(const float& td) const;
 	
 	const sf::Vector2f& getSpritePosition() const;
 	const sf::Vector2f getCenter() const;

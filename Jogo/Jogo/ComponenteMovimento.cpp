@@ -65,6 +65,23 @@ const bool ComponenteMovimento::getState(const short unsigned state) const
 	return false;
 }
 
+void ComponenteMovimento::stopVelocity()
+{
+	this->velocidade.x = 0.f;
+	this->velocidade.y = 0.f;
+
+}
+
+void ComponenteMovimento::stopVelocityX()
+{
+	this->velocidade.x = 0.f;
+}
+
+void ComponenteMovimento::stopVelocityY()
+{
+	this->velocidade.y = 0.f;
+}
+
 /*Funcoes*/
 void ComponenteMovimento::move(const float dir_x, const float dir_y, const float& td)
 {

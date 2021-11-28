@@ -1,4 +1,3 @@
-
 #include "ComponenteHitbox.h"
 
 enum movement_states { IDLE = 0, MOVE_LEFT, MOVE_RIGHT, JUMP, FALL };
@@ -31,6 +30,9 @@ public:
 
 	/*Funcoes*/
 	const bool getState(const short unsigned state) const;
+	void stopVelocity();
+	void stopVelocityX();
+	void stopVelocityY();
 
 	void move(const float dir_x, const float dir_y, const float& td);
 	void update(const float& dt);

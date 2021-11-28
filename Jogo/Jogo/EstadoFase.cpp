@@ -176,7 +176,7 @@ void EstadoFase::updatePauseMenuButtons()
 void EstadoFase::updateTileMap(const float& td)
 {
 	this->tileMap->update();
-	this->tileMap->updateCollision(this->jogador);
+	this->tileMap->updateCollision(this->jogador, td);
 
 }
 
@@ -192,9 +192,9 @@ void EstadoFase::atualiza(const float& td)
 
 		this->updatePlayerInput(td);
 
-		this->jogador->atualiza(td);
-
 		this->updateTileMap(td);
+
+		this->jogador->atualiza(td);
 	}
 	else	//atualiza o menu de pausa
 	{
@@ -213,7 +213,7 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 	this->renderTexture.clear();
 
 	this->renderTexture.setView(this->view);
-	this->tileMap->render(this->renderTexture);
+	this->tileMap->render(this->renderTexture, this->jogador);
 
 	this->jogador->renderiza(this->renderTexture);
 
@@ -225,7 +225,7 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 
 	//final render
 	this->renderTexture.display();
-	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	//this->renderSprite.setTexture(this->renderTexture.getTexture());
 	alvo->draw(this->renderSprite);
 }
 

@@ -146,7 +146,7 @@ gui::DropDownList::DropDownList(float x, float y, float width, float height,
 		sf::Color(255, 255, 255, 200), sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50)
 	);
 
-	for (size_t i = 0; i < nrOfElements; i++)
+	for (unsigned i = 0; i < nrOfElements; i++)
 	{
 		this->list.push_back(
 			new gui::Botao(

@@ -1,6 +1,5 @@
 #pragma once
 #include"ComponenteHitbox.h"
-#include"ComponenteAtributos.h"
 
 class Entidade
 {
@@ -20,6 +19,7 @@ public:
 	virtual ~Entidade();
 
 	virtual const sf::Vector2f& getPosition() const;
+	virtual const sf::Vector2u& getGridPosition(const unsigned gridSizeU) const;
 	virtual const sf::FloatRect getGlobalBounds() const;
 
 	/*Funções de Componente*/

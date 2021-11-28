@@ -90,9 +90,6 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Tiles</Filter>
     </ClCompile>
-    <ClCompile Include="ComponenteAtributos.cpp">
-      <Filter>Componentes</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
@@ -157,9 +154,6 @@
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Tiles</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponenteAtributos.h">
-      <Filter>Componentes</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Arquivos de Cabeçalho</Filter>

@@ -3,9 +3,11 @@
 
 #include "Tile.h"
 #include "Entidade.h"
+#include "EntidadeDinamica.h"
 
 class Tile;
 class Entidade;
+class EntidadeDinamica;
 
 class TileMap
 {
@@ -13,10 +15,10 @@ private:
 	void clear();
 
 	float gridSizeF;
-	unsigned gridSizeU;
-	unsigned layers;
+	int gridSizeI;
+	int layers;
 
-	sf::Vector2u maxSizeWorldGrid;
+	sf::Vector2i maxSizeWorldGrid;
 	sf::Vector2f maxSizeWorldF;
 	std::vector< std::vector< std::vector< Tile* > > > map;
 	std::string textureFile;
@@ -24,8 +26,15 @@ private:
 
 	sf::RectangleShape collisionBox;
 
+	//culling
+	int fromX;
+	int toX;
+	int fromY;
+	int toY;
+	int layer = 0;
+
 public:
-	TileMap(float gridSize, unsigned width, unsigned height, std::string texture_file);
+	TileMap(float gridSize, int width, int height, std::string texture_file);
 	virtual ~TileMap();
 
 	//accessors
@@ -33,12 +42,12 @@ public:
 
 
 	//functions
-	void addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect, const bool colisao, const short tipo);
-	void removeTile(const unsigned x, const unsigned y, const unsigned z);
+	void addTile(const int x, const int y, const int z, const sf::IntRect& texture_rect, const bool colisao, const short tipo);
+	void removeTile(const int x, const int y, const int z);
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
 
-	void updateCollision(Entidade* entity);
+	void updateCollision(EntidadeDinamica* entity, const float& td);
 
 	void update();
 	void render(sf::RenderTarget& alvo, Entidade* entity = NULL);
