@@ -1,4 +1,7 @@
+#include "stdafx.h"
 #include "EstadoMenuPrincipal.h"
+#include "GraphicsSettings.h"
+#include "GUI.h"
 
 /*Inicializadores*/
 void EstadoMenuPrincipal::initVariaveis()
@@ -11,12 +14,12 @@ void EstadoMenuPrincipal::initPlanoDeFundo()
 	this->planoDeFundo.setSize(
 		sf::Vector2f
 		(
-			static_cast<float>(this->janela->getSize().x), 
+			static_cast<float>(this->janela->getSize().x),
 			static_cast<float>(this->janela->getSize().y)
 		)
 	);
 
-	if (!this->texturaPlanoDeFundo.loadFromFile("Resources/Images/Backgrounds/background_grafico.png"))
+	if (!this->texturaPlanoDeFundo.loadFromFile("Resources/Images/Backgrounds/background.png"))
 	{
 		throw "ERRO::ESTADO_MENU_PRINCIPAL::FALHOU_CARREGAR_TEXTURA_BACKGROUND";
 	}
@@ -44,38 +47,37 @@ void EstadoMenuPrincipal::iniTeclas()
 
 void EstadoMenuPrincipal::iniBotoes()
 {
-	this->botoes["EDITOR"] = new Botao(200, 200, 200, 200,
+	this->botoes["EDITOR"] = new gui::Botao(200.f, 200.f, 200.f, 200.f,
 		&this->font, "EDITOR", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));	
+		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200)
+	);	
 	
-	
-	this->botoes["FASE_1"] = new Botao(802, 700, 150, 50,
+	this->botoes["FASE_1"] = new gui::Botao(802.f, 700.f, 150.f, 50.f,
 		&this->font, "Novo Jogo", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 	
-	this->botoes["FASE_2"] = new Botao(970, 700, 150, 50,
+	this->botoes["FASE_2"] = new gui::Botao(970.f, 700.f, 150.f, 50.f,
 		&this->font, "Selecionar Fase", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 		
-	this->botoes["CONFIG"] = new Botao(802, 770, 150, 50,
+	this->botoes["CONFIG"] = new gui::Botao(802.f, 770.f, 150.f, 50.f,
 		&this->font, "Configurações", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 
-	this->botoes["SAIR"] = new Botao(970, 770, 150, 50,
+	this->botoes["SAIR"] = new gui::Botao(970.f, 770.f, 150.f, 50.f,
 		&this->font, "Sair", 24,
 		sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33), sf::Color(33, 33, 33, 33),
 		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 200));
 }
 
 /*Construtora e Destrutora*/
-EstadoMenuPrincipal::EstadoMenuPrincipal(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)// , UIManager* ui_manager)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo)
+EstadoMenuPrincipal::EstadoMenuPrincipal(DataEstado* data_estado)
+	: Estado(data_estado)
 {
-	//this->ui_manager = ui_manager;
 	this->initVariaveis();
 	this->initPlanoDeFundo();
 	this->iniFontes();
@@ -121,8 +123,7 @@ void EstadoMenuPrincipal::renderiza(sf::RenderTarget* alvo)
 
 	alvo->draw(this->planoDeFundo);
 
-	this->renderizaBotoes(alvo);
-
+	this->renderizaBotoes(*alvo);
 
 	//REMOVE
 	sf::Text mouseText;
@@ -143,31 +144,32 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	//main loop
 	for (auto& it : this->botoes)
 	{
-		it.second->update(this->mousePosView);
+		it.second->update(this->mousePosWindow);
 	}
 
 	//editor
 	if (this->botoes["EDITOR"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoEditor(this->dataEstado));
 	}
 
 	//new game
 	if (this->botoes["FASE_1"]->isPressed())
 	{
-		this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
+		this->estados->push(new EstadoFase1(this->dataEstado));
+		//this->estados->push(new Fase1()/*this->teclasDisponiveis, this->janela, this->estados)*/);
 	}
 	
 	//select stage
 	if (this->botoes["FASE_2"]->isPressed())
 	{
-		this->estados->push(new EstadoFase(this->teclasDisponiveis, this->janela, this->estados));
+		this->estados->push(new EstadoFase(this->dataEstado));
 	}
 	
 	//config menu
 	if (this->botoes["CONFIG"]->isPressed())
 	{
-		/*TODO*/
+		this->estados->push(new EstadoConfig(this->dataEstado));
 	}
 
 	//quit the game
@@ -177,7 +179,7 @@ void EstadoMenuPrincipal::atualizaBotoes()
 	}
 }
 
-void EstadoMenuPrincipal::renderizaBotoes(sf::RenderTarget* alvo)
+void EstadoMenuPrincipal::renderizaBotoes(sf::RenderTarget& alvo)
 {
 	for (auto& it : this->botoes)
 	{

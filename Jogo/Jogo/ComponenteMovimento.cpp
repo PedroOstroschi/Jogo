@@ -1,16 +1,17 @@
+#include "stdafx.h"
 #include "ComponenteMovimento.h"
+#include "ComponenteHitbox.h"
 
 /*Funcoes Inicializadoras*/
 
 
 /*Construtora e Destrutora*/
 ComponenteMovimento::ComponenteMovimento(sf::Sprite& sprite, 
-	float velocidadeMaxima, float aceleracao, float desaceleracao)
+	float velocidadeMaxima, float velocidadeMaximaY, float aceleracao, float desaceleracao)
 	: sprite(sprite),
-	velocidadeMaxima(velocidadeMaxima), aceleracao(aceleracao), desaceleracao(desaceleracao)
+	velocidadeMaxima(velocidadeMaxima), velocidadeMaximaY(velocidadeMaximaY), aceleracao(aceleracao), desaceleracao(desaceleracao)
 {
 	this->gravidade = 40.f;
-	this->velocidadeMaximaY = 15.f;
 }
 
 ComponenteMovimento::~ComponenteMovimento()
@@ -18,9 +19,67 @@ ComponenteMovimento::~ComponenteMovimento()
 
 }
 
+//Accessors
+
+
+const float& ComponenteMovimento::getMaxVelocity() const
+{
+	return this->velocidadeMaxima;
+}
+
 const sf::Vector2f& ComponenteMovimento::getVelocity() const
 {
 	return this->velocidade;
+}
+
+const bool ComponenteMovimento::getState(const short unsigned state) const
+{
+	switch (state)
+	{
+	case IDLE:
+		if (this->velocidade.x == 0.f)//&& this->velocidade.y == 0.f);
+			return true;
+		break;
+
+	case MOVE_LEFT:
+		if (this->velocidade.x < 0.f)
+			return true;
+		break;
+
+	case MOVE_RIGHT:
+		if (this->velocidade.x > 0.f)
+			return true;
+		break;
+
+	case JUMP:
+		if (this->velocidade.y < 0.f)
+			return true;
+		break;
+
+	case FALL:
+		if (this->velocidade.y > 0.f)
+			return true;
+		break;
+	}
+	
+	return false;
+}
+
+void ComponenteMovimento::stopVelocity()
+{
+	this->velocidade.x = 0.f;
+	this->velocidade.y = 0.f;
+
+}
+
+void ComponenteMovimento::stopVelocityX()
+{
+	this->velocidade.x = 0.f;
+}
+
+void ComponenteMovimento::stopVelocityY()
+{
+	this->velocidade.y = 0.f;
 }
 
 /*Funcoes*/
@@ -40,11 +99,11 @@ void ComponenteMovimento::update(const float& td)
 
 	/*Aplica gravidade*/
 
-	this->velocidade.y += 1.0 * this->gravidade;
+	// this->velocidade.y += 1.0 * this->gravidade;
 
 	//Verificar velocidade maxima
-	if (this->velocidade.y > this->velocidadeMaximaY)
-		this->velocidade.y = this->velocidadeMaximaY * ((this->velocidade.y < 0.f)? -1.f : 1.f);
+	if (this->velocidade.y > this->velocidadeMaxima)
+		this->velocidade.y = this->velocidadeMaxima * ((this->velocidade.y < 0.f)? -1.f : 1.f);
 
 	/*Acelera a sprite até a velocidade maxima e ao parar de andar, a desacelera
 	criando assim uma movimentacao mais fluida*/
@@ -53,7 +112,7 @@ void ComponenteMovimento::update(const float& td)
 	if (this->velocidade.x > 0.f)	//verifica se x eh positivo
 	{
 		//Verificar velocidade maxima
-		if (this->velocidade.x > this->velocidadeMaxima)
+		if (this->velocidade.x > this->velocidadeMaxima) 
 			this->velocidade.x = this->velocidadeMaxima;
 
 		//desaceleracao
@@ -74,7 +133,7 @@ void ComponenteMovimento::update(const float& td)
 	}
 
 	//Y
-	/* if (this->velocidade.y > 0.f)	//check for positive y
+	if (this->velocidade.y > 0.f)	//check for positive y
 	{
 		//Verificar velocidade maxima
 		if (this->velocidade.y > this->velocidadeMaxima)
@@ -95,7 +154,7 @@ void ComponenteMovimento::update(const float& td)
 		this->velocidade.y += desaceleracao;
 		if (this->velocidade.y > 0.f)
 			this->velocidade.y = 0.f;
-	}*/
+	}
 
 	//Movimentacao Final
 	this->sprite.move(this->velocidade * td);	//usa velocidade

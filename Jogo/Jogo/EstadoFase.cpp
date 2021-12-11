@@ -1,10 +1,45 @@
+#include "stdafx.h"
 #include "EstadoFase.h"
-#include "ListaEntidade.h"
+
+void EstadoFase::iniPosRender()
+{
+	this->renderTexture.create(
+		this->dataEstado->gfxSettings->resolution.width,
+		this->dataEstado->gfxSettings->resolution.height
+	);
+
+	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	this->renderSprite.setTextureRect(
+		sf::IntRect(
+			0,
+			0,
+			this->dataEstado->gfxSettings->resolution.width,
+			this->dataEstado->gfxSettings->resolution.height
+		)
+	);
+}
 
 /*Inicializadores*/
+void EstadoFase::iniView()
+{
+	this->view.setSize(
+		sf::Vector2f(
+			this->dataEstado->gfxSettings->resolution.width,
+			this->dataEstado->gfxSettings->resolution.height
+		)
+	);
+	this->view.setCenter(
+		sf::Vector2f(
+			this->dataEstado->gfxSettings->resolution.width / 2.f,
+			this->dataEstado->gfxSettings->resolution.height / 2.f
+		)
+	);
+
+}
+
 void EstadoFase::iniElementos()
 {
-	/*this->*/listaEntidades->LEs.push(jogador);
+
 }
 
 void EstadoFase::iniTeclas()
@@ -25,36 +60,70 @@ void EstadoFase::iniTeclas()
 	ifs.close();
 }
 
+void EstadoFase::iniFontes()
+{
+	if (!this->font.loadFromFile("Fonts/comic.ttf"))
+	{
+		throw("nao carregou fonte");
+	}
+}
+
 void EstadoFase::iniTexturas()
 {
-	if (!this->textures["PLAYER"].loadFromFile("Resources/Images/Sprites/Players/1Woodcutter/Woodcutter.png"))
+	if (!this->textures["PLAYER_SHEET"].loadFromFile("Resources/Images/Sprites/Players/Player_1/player_1_sheet.png"))
 	{
 		throw "ERRO::ESTADO_JOGO::NAO_CARREGOU_TEXTURA_PLAYER";
 	}
 }
 
+void EstadoFase::initPauseMenu()
+{
+	this->menupause = new MenuPause(this->janela, this->font);
+
+	this->menupause->addButton("DESPAUSAR", 600.f, "DESPAUSAR");
+	this->menupause->addButton("SALVAR", 700.f, "SALVAR");
+	this->menupause->addButton("SAIR", 800.f, "SAIR");
+}
+
 void EstadoFase::iniJogadores()
 {
-	this->jogador = new Jogador(0, 0, this->textures["PLAYER"]);
+	this->jogador = new Jogador(0, 0, this->textures["PLAYER_SHEET"]);
+}
+
+void EstadoFase::iniTileMap()
+{
+	this->tileMap = new TileMap(this->dataEstado->gridSize, 10, 10, "Resources/Images/Sprites/Map/mainlev_build.png");
+	this->tileMap->loadFromFile("text_teste");
 }
 
 /*Construtora e Destrutora*/
-EstadoFase::EstadoFase(std::map<std::string, int>* teclasDisponiveis, sf::RenderWindow* janela, std::stack<Estado*>* estados)
-	:Estado(teclasDisponiveis, janela, estados, cooperativo), menupause(janela, estados)
+EstadoFase::EstadoFase(DataEstado* data_estado)
+	: Estado(data_estado)
 {
-	listaEntidades = new ListaEntidade;
-
+	this->iniPosRender();
+	this->iniView();
 	this->iniTeclas();
+	this->iniFontes();
 	this->iniTexturas();
-	this->iniJogadores();
-	this->iniElementos();
+	this->initPauseMenu();
 
-	listaEntidades = new ListaEntidade;
+	this->iniJogadores();
+	this->iniTileMap();
+	this->iniElementos();
 }
 
 EstadoFase::~EstadoFase()
 {
 	delete this->jogador;
+	delete this->menupause;
+	delete this->tileMap;
+}
+
+void EstadoFase::updateView(const float& td)
+{
+	this->view.setCenter(std::floor(this->jogador->getPosition().x), std::floor(this->jogador->getPosition().y));
+//	this->view.setCenter(std::floor(this->jogador->getPosition().x), this->dataEstado->gfxSettings->resolution.height / 2);
+
 }
 
 /*Funções*/
@@ -74,7 +143,7 @@ void EstadoFase::despausaEstado()
 	this->pausado = false;
 }
 
-void EstadoFase::atualizaTeclas(const float td)
+void EstadoFase::updatePlayerInput(const float td)
 {
 	//atualiza entrada do jogador
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("MOVE_ESQ"))))
@@ -87,31 +156,51 @@ void EstadoFase::atualizaTeclas(const float td)
 		this->jogador->move(1.f, 0.f, td);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("FECHAR"))))
 		this->sair = true;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))))
-	{
-		if (!this->pausado)
-			this->pausaEstado();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("DESPAUSAR"))))
-	{
-		if (this->pausado)
-			this->despausaEstado();
-	}
+
 		
+}
+
+void EstadoFase::updatePauseMenuButtons()
+{
+	if (this->menupause->isButtonPressed("SAIR"))
+		this->estados->top()->fechaEstado();
+
+	if (this->menupause->isButtonPressed("DESPAUSAR"))
+		this->estados->top()->despausaEstado();
+
+	if (this->menupause->isButtonPressed("SALVAR"))
+		this->estados->top()->salva();
+
+}
+
+void EstadoFase::updateTileMap(const float& td)
+{
+	this->tileMap->update();
+	this->tileMap->updateCollision(this->jogador, td);
+
 }
 
 void EstadoFase::atualiza(const float& td)
 {
+	this->atualizaPosicaoMouse(&this->view);
+	this->updateKeyTime(td);
+	this->updateInput(td);
+
 	if (!this->pausado)	//atualiza o jogo despausado
 	{
-		this->atualizaPosicaoMouse();
-		this->atualizaTeclas(td);
+		this->updateView(td);
+
+		this->updatePlayerInput(td);
+
+		this->updateTileMap(td);
 
 		this->jogador->atualiza(td);
 	}
 	else	//atualiza o menu de pausa
 	{
-		this->menupause.atualiza();
+		this->menupause->atualiza(this->mousePosWindow);
+
+		this->updatePauseMenuButtons();
 	}
 }
 
@@ -121,35 +210,30 @@ void EstadoFase::renderiza(sf::RenderTarget* alvo)
 	if (alvo == NULL)
 		alvo = this->janela;
 
-	this->jogador->renderiza(this->janela);
+	this->renderTexture.clear();
+
+	this->renderTexture.setView(this->view);
+	this->tileMap->render(this->renderTexture, this->jogador);
+
+	this->jogador->renderiza(this->renderTexture);
 
 	if (this->pausado)	//render menu pause
 	{
-		this->menupause.renderiza(alvo);
+		this->renderTexture.setView(this->renderTexture.getDefaultView());
+		this->menupause->renderiza(this->renderTexture);
 	}
+
+	//final render
+	this->renderTexture.display();
+	//this->renderSprite.setTexture(this->renderTexture.getTexture());
+	alvo->draw(this->renderSprite);
 }
 
 /*criacao da fase*/
 
 void EstadoFase::gerarFase()
 {
-	ListaEntidade* listaEntidades = getListaEntidade();
-		fgets(LinhaAtual, 100, fase);
-	for (int i = 0; i < 20; i++)
-	{
-		for (int j = 0; j < strlen(LinhaAtual); j++)
-		{
-			if (LinhaAtual[j] == '1')
-			{
-				Plataforma* temporario;
-				/*tamanho, posicao*/
-				/*posicao, desCorpo, tamanhoCorpo*/
-				temporario = new Plataforma(sf::Vector2f(((float)j) * 100.0f, ((float)i) * 100.0f), sf::Vector2f(100.0f, 100.0f), sf::Vector2f(100.0f, 100.0f),  false);
-				listaEntidades->LEs
-			}
-			
-		}
-	}
+//
 }
 
 void EstadoFase::gerarInimigos() {
@@ -158,6 +242,17 @@ void EstadoFase::gerarInimigos() {
 
 void EstadoFase::gerarObstaculos()
 {
+}
+
+void EstadoFase::updateInput(const float& td)
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->teclas.at("PAUSAR"))) && this->getKeytime())
+	{
+		if (!this->pausado)
+			this->pausaEstado();
+		else
+			this->despausaEstado();
+	}
 }
 
 void EstadoFase::salva()
